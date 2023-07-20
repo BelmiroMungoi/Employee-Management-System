@@ -10,18 +10,26 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderInterceptorModule } from './service/header-interceptor.service';
+import { EmployeeComponent } from './component/employee/employee.component';
+import { DeparmentComponent } from './component/deparment/deparment.component';
+import { MissionComponent } from './component/mission/mission.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    EmployeeComponent,
+    DeparmentComponent,
+    MissionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HeaderInterceptorModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     NgbModule, 
