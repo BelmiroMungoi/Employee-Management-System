@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/service/login.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,18 +10,20 @@ import { LoginRequestPayload } from '../../model/login-request.payload';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
   loginRequest!: LoginRequestPayload
-  userData: any;   
+  registerSucessMessage!: string;
+  paramete!: string;
 
-  constructor(private loginService: LoginService, private router: Router, private toastr: ToastrService) {
-      this.loginRequest = {
-        email: '',
-        password: ''
-      };
-     }
+  constructor(private loginService: LoginService, private router: Router,
+    private toastr: ToastrService, private activatedRoute: ActivatedRoute) {
+    this.loginRequest = {
+      email: '',
+      password: ''
+    };
+  }
 
   doLogin() {
     if (this.loginForm.valid) {
@@ -32,15 +34,15 @@ export class LoginComponent implements OnInit{
         var token = JSON.parse(JSON.stringify(data)).Authorization;
         localStorage.setItem("access_token", token);
         this.router.navigate(['home'])
-        this.userData = data;
+        this.toastr.success("Bem-vindo ao sistema");
         console.log(data);
-        console.log(token);
       },
         error => {
+          this.toastr.error("Email ou Palavra-Passe estão incorretos!");
           console.error("Erro ao fazer login " + error);
         });
     } else {
-      this.toastr.warning('Insira Dados Válidos')
+      this.toastr.warning('Por favor insira dados válidos!')
     }
   }
 
@@ -51,8 +53,16 @@ export class LoginComponent implements OnInit{
     });
     if (localStorage.getItem('access_token') != null &&
       localStorage.getItem('access_token')?.toString().trim() != null) {
-        this.router.navigate(['home']);
+      this.router.navigate(['home']);
+    }
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['registered'] !== undefined && params['registered'] === 'true') {
+        this.toastr.success("Usuário registrado com Sucesso");
+        this.registerSucessMessage = 'Mandamos um link para verificar o seu email!' + 
+        ' Por favor verique o seu email para activar a sua conta!';
       }
+    })
   }
 
 }
