@@ -8,16 +8,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Employee-Management-System';
-  isMenuRequired = false;
 
-  constructor(private router: Router) {
-    let currentUrl = this.router.url;
-    if (currentUrl == '/login' || currentUrl == '/register') {
-      this.isMenuRequired = false;
-    } else {
-      this.isMenuRequired = true;
-    }
-  }
+  constructor() {}
+
   public hideMenu() {
     if (localStorage.getItem('access_token') != null &&
       localStorage.getItem('access_token')?.toString().trim() != null) {
