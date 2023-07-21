@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AppConstants } from '../app-constants';
 import { Observable } from 'rxjs'
-import { LoginRequestPayload } from '../auth/login/login-request.payload';
+import { LoginRequestPayload } from '../model/login-request.payload';
 
 @Injectable({
   providedIn: 'root'

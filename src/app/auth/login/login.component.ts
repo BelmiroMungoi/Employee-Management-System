@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/service/login.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { LoginRequestPayload } from './login-request.payload';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginRequestPayload } from '../../model/login-request.payload';
 
 @Component({
   selector: 'app-login',
