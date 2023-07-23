@@ -14,6 +14,7 @@ import { HeaderInterceptorModule } from './service/header-interceptor.service';
 import { EmployeeComponent } from './component/employee/employee.component';
 import { DeparmentComponent } from './component/deparment/deparment.component';
 import { MissionComponent } from './component/mission/mission.component';
+import { EmployeeAddComponent } from './component/employee-add/employee-add.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MissionComponent } from './component/mission/mission.component';
     RegisterComponent,
     EmployeeComponent,
     DeparmentComponent,
-    MissionComponent
+    MissionComponent,
+    EmployeeAddComponent
   ],
   imports: [
     BrowserModule,
