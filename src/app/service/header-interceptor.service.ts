@@ -11,7 +11,7 @@ export class HeaderInterceptorService implements HttpInterceptor{
 
   constructor(private toastr: ToastrService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (localStorage.getItem('access_token') != null) {
+    if (localStorage.getItem('access_token') != null && localStorage.getItem('access_token')?.toString().trim() != null) {
       const token = 'Bearer ' + localStorage.getItem('access_token');
       const tokenRequest = req.clone({
         headers: req.headers.set('Authorization', token)
