@@ -14,4 +14,13 @@ export class LoginService {
   login(userLogin: LoginRequestPayload): Observable<any>{
     return this.http.post(AppConstants.baseLogin, userLogin);         
   } 
+
+  isAuthenticated() {
+    if (localStorage.getItem('access_token') != null && 
+    localStorage.getItem('access_token')?.toString().trim() != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
