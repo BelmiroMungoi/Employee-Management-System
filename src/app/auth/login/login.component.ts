@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
   loginRequest!: LoginRequestPayload
-  registerSucessMessage!: string;
-  paramete!: string;
+  registerSucessMessage!: string;  
+  showMessage = false;
 
   constructor(private loginService: LoginService, private router: Router,
     private toastr: ToastrService, private activatedRoute: ActivatedRoute) {
@@ -31,8 +31,7 @@ export class LoginComponent implements OnInit {
       this.loginRequest.password = this.loginForm.get('password')?.value;
 
       this.loginService.login(this.loginRequest).subscribe((data) => {
-        var token = JSON.parse(JSON.stringify(data)).Authorization;
-        localStorage.setItem("access_token", token);
+        localStorage.setItem("access_token", data.access_token);
         this.router.navigate(['home'])
         this.toastr.success("Bem-vindo ao sistema");
         console.log(data);
@@ -59,6 +58,7 @@ export class LoginComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       if (params['registered'] !== undefined && params['registered'] === 'true') {
         this.toastr.success("Usuário registrado com Sucesso");
+        this.showMessage = true;
         this.registerSucessMessage = 'Mandamos um link para verificar o seu email!' + 
         ' Por favor verique o seu email para activar a sua conta!';
       }
