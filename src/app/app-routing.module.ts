@@ -7,15 +7,17 @@ import { EmployeeComponent } from './component/employee/employee.component';
 import { DeparmentComponent } from './component/deparment/deparment.component';
 import { MissionComponent } from './component/mission/mission.component';
 import { EmployeeAddComponent } from './component/employee-add/employee-add.component';
+import { GuardianGuard } from './service/guardian.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent }, 
+  { path: 'home', component: HomeComponent, canActivate: [GuardianGuard] }, 
   { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
-  { path: 'employee', component: EmployeeComponent},
-  { path: 'employeeAdd', component: EmployeeAddComponent},
-  { path: 'department', component: DeparmentComponent},
-  { path: 'mission', component: MissionComponent}
+  { path: 'employee', component: EmployeeComponent, canActivate: [GuardianGuard] },
+  { path: 'employeeAdd', component: EmployeeAddComponent, canActivate: [GuardianGuard] },
+  { path: 'department', component: DeparmentComponent, canActivate: [GuardianGuard] },
+  { path: 'mission', component: MissionComponent, canActivate: [GuardianGuard] }
 ];
 
 @NgModule({
