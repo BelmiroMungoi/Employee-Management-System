@@ -25,7 +25,6 @@ export class EmployeeComponent implements OnInit{
     this.employeeService.getAllEmployee().subscribe(
       (response: EmployeeResponsePayload[]) => {
         this.employees = response;
-        console.info(response);
       }, 
       (error: HttpErrorResponse) => {
         this.toastr.error("Aconteceu um erro ao carregar a lista de funcionários!")
