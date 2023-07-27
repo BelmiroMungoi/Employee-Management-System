@@ -40,9 +40,9 @@
                     <td>{{employee.birthdate}}</td>
                     <td>{{employee.department.name}}</td>
                     <td>
-                      <button style="width: 45px; margin-right: 5px;" class="bi bi-person-square btn btn-info" title="Ver Perfil"></button>
-                      <button style="width: 45px; margin-right: 5px;" class="bi bi-trash btn btn-danger" title="Deletar"></button>
-                      <button style="width: 45px;" class="bi bi-pencil-square btn btn-warning" title="Editar"></button>
+                      <button style="width: 40px; margin-right: 2px;" class="bi bi-person-square btn btn-info" title="Ver Perfil"></button>
+                      <button style="width: 40px; margin-right: 2px;" class="bi bi-trash btn btn-danger" title="Deletar"></button>
+                      <button style="width: 40px;" [routerLink]="['/employeeAdd', employee.id]" class="bi bi-pencil-square btn btn-warning" title="Editar"></button>
                     </td>
                   </tr>
                 </tbody>
