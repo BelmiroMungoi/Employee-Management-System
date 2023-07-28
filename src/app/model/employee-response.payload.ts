@@ -2,7 +2,7 @@ import { Department } from "./department.payload";
 
 export class EmployeeResponsePayload {
 
-    id!: string;
+    id!: Number;
     employeeIdentifier!: string;
     firstname!: string;
     lastname!: string;
