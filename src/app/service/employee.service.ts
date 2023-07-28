@@ -4,6 +4,7 @@ import { EmployeeRequestPayload } from '../model/employee-request.payload';
 import { Observable } from 'rxjs';
 import { AppConstants } from '../app-constants';
 import { EmployeeResponsePayload } from '../model/employee-response.payload';
+import { SearchRequest } from '../model/search-request.payload';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,13 @@ export class EmployeeService {
 
   updateEmployee(id: any, employee: EmployeeRequestPayload): Observable<any> {
     return this.http.put(AppConstants.baseServer + "/employee/" + id, employee);
+  }
+
+  deleteEmployee(id: Number): Observable<any> {
+    return this.http.delete<any>(AppConstants.baseServer + "/employee/" + id);
+  }
+
+  getEmployeeByFirstname(name: String): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/employee/name/" + name);
   }
 }
