@@ -81,7 +81,6 @@ export class EmployeeAddComponent implements OnInit {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== null) {
       this.employeeService.getEmployeeById(id).subscribe(response => {
-        console.info(response.department.name);
         this.employeeForm = new FormGroup({
           id: new FormControl({ value: response.id, disabled: true }),
           employeeIdentifier: new FormControl({ value: response.employeeIdentifier, disabled: true }),
