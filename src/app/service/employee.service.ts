@@ -30,7 +30,7 @@ export class EmployeeService {
   }
 
   deleteEmployee(id: Number): Observable<any> {
-    return this.http.delete<any>(AppConstants.baseServer + "/employee/" + id);
+    return this.http.delete(AppConstants.baseServer + "/employee/" + id, { responseType: 'text' });
   }
 
   getEmployeeByFirstname(name: String): Observable<any> {
