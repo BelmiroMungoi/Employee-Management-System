@@ -42,7 +42,15 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Lista de Departamentos</h5>
-
+                        <div class="search-bar" style="margin-bottom: 25px;">
+                            <form class="search-form row g-2" [formGroup]="searchForm" (ngSubmit)="searchDepartmentByName()">
+                              <div class="col-md-5" style="position:absolute; right:0px; top:35px;">
+                                <input type="text" [formControlName]="'departmentName'" name="departmentName"
+                                 placeholder="Pesquise pelo departamento" title="Insira o nome do departmento">
+                                <button type="submit" title="Pesquisar" ><i class="bi bi-search"></i></button>
+                              </div>
+                            </form>
+                          </div>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
