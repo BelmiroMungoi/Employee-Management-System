@@ -95,6 +95,20 @@ export class DepartmentComponent implements OnInit {
     }
   }
 
+  public deleteDepartment(id: any) {
+    this.departmentId = id;
+    console.info(id)
+    if (this.departmentId != null && this.departmentId.toString().length != 0) {
+      this.departmentService.deleteDepartment(this.departmentId).subscribe(response => {
+        this.toastr.success(response);
+        this.getAllDepartments();
+      }, error => {
+        this.toastr.error('Ocorreu um erro ao eliminar departamento');
+        console.error(error.message);
+      })
+    }
+  }
+
   public fillForm(id: any) {
     if (id !== null) {
       this.departmentService.getDepartmentById(id).subscribe(response => {

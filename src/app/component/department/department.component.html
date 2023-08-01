@@ -65,7 +65,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let department of departments; let i = index">
+                                <tr *ngFor="let department of departments">
                                     <th scope="row">{{department.id}}</th>
                                     <td>{{department.name}}</td>
                                     <td>{{department.shortName}}</td>
@@ -73,7 +73,7 @@
                                     <td>
                                         <button style="width: 40px; margin-right: 2px;"
                                             class="bi bi-person-square btn btn-info" title="Ver Departamento"></button>
-                                        <button style="width: 40px; margin-right: 2px;"
+                                        <button style="width: 40px; margin-right: 2px;" (click)="deleteDepartment(department.id)"
                                             class="bi bi-trash btn btn-danger" title="Deletar"></button>
                                         <button style="width: 40px;" class="bi bi-pencil-square btn btn-warning"
                                            (click)="fillForm(department.id)" title="Editar"></button>
