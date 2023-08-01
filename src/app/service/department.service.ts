@@ -19,4 +19,8 @@ export class DepartmentService {
   getAllDepartments(): Observable<Department[]> {
     return this.http.get<Department[]>(AppConstants.baseServer + "/department/");
   }
+
+  getAllDepartmentByName(name: String): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/department/" + name);
+  }
 }

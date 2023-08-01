@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DepartmentRequest } from 'src/app/model/department-request.payload';
 import { Department } from 'src/app/model/department.payload';
+import { SearchRequest } from 'src/app/model/search-request.payload';
 import { DepartmentService } from 'src/app/service/department.service';
 
 @Component({
@@ -15,6 +16,9 @@ export class DepartmentComponent implements OnInit {
   departments!: Department[];
   departmentRequest!: DepartmentRequest;
   departmentForm!: FormGroup;
+  searchForm!: FormGroup;
+  searchRequest!: SearchRequest;
+  name!: string;
 
   constructor(private departmentService: DepartmentService, private toastr: ToastrService) {
     this.departmentRequest = {
@@ -29,6 +33,10 @@ export class DepartmentComponent implements OnInit {
       id: new FormControl({ value: '', disabled: true }),
       name: new FormControl('', Validators.required),
       shortName: new FormControl('', Validators.required)
+    });
+
+    this.searchForm = new FormGroup({
+      departmentName: new FormControl('')
     });
   }
 
@@ -55,6 +63,21 @@ export class DepartmentComponent implements OnInit {
       this.toastr.error('Ocorreu um erro ao carregar a lista de departamentos!');
       console.error(error.message)
     })
+  }
+
+  public searchDepartmentByName() {
+    this.name = this.searchForm.get('departmentName')?.value;
+    if (this.name == null || this.name == '') {
+      this.getAllDepartments();
+    } else {
+      this.departmentService.getAllDepartmentByName(this.name).subscribe(response => {
+        this.departments = response;
+      }, error => {
+        this.toastr.error('Ocorreu ao pesquisar departamentos!');
+        console.error(error.message);
+        
+      })
+    }
   }
 
   public cleanForm() {

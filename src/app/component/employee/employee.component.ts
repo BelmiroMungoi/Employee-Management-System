@@ -24,8 +24,7 @@ export class EmployeeComponent implements OnInit {
   constructor(private employeeService: EmployeeService, private toastr: ToastrService) {
     this.searchRequest = {
       firstname: '',
-      lastname: '',
-      email: ''
+      departmentName: ''
     }
   }
 
