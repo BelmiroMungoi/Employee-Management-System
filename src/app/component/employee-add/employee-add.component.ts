@@ -48,7 +48,7 @@ export class EmployeeAddComponent implements OnInit {
           console.error(error.message);
         })
       } else {
-        this.toastr.error('Preencha devidamente o formulário!')
+        this.toastr.warning('Preencha devidamente o formulário!')
       }
     } else
       if (this.employeeForm.valid) {
@@ -63,7 +63,7 @@ export class EmployeeAddComponent implements OnInit {
           }
         )
       } else {
-        this.toastr.error('Preencha devidamente o formulário!')
+        this.toastr.warning('Preencha devidamente o formulário!')
       }
 
   }
