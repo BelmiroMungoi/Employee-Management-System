@@ -23,4 +23,12 @@ export class DepartmentService {
   getAllDepartmentByName(name: String): Observable<any> {
     return this.http.get<any>(AppConstants.baseServer + "/department/" + name);
   }
+
+  getDepartmentById(id: any): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/department/id/" + id);
+  }
+
+  updateDepartment(id: any, deparment: DepartmentRequest): Observable<any>{
+    return this.http.put(AppConstants.baseServer + "/department/" + id, deparment);
+  }
 }
