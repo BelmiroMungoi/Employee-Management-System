@@ -30,8 +30,10 @@
                                 <input type="text" [formControlName]="'shortName'" class="form-control" id="abrev">
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn btn-primary" style="margin-right: 3px; width: 95px;">Salvar</button>
-                                <button type="reset" class="btn btn-warning" style="width: 95px;" (click)="cleanForm()">Cancelar</button>
+                                <button type="submit" class="btn btn-primary"
+                                    style="margin-right: 3px; width: 95px;">Salvar</button>
+                                <button type="reset" class="btn btn-warning" style="width: 95px;"
+                                    (click)="cleanForm()">Cancelar</button>
                             </div>
                         </form>
                     </div>
@@ -43,14 +45,15 @@
                     <div class="card-body">
                         <h5 class="card-title">Lista de Departamentos</h5>
                         <div class="search-bar" style="margin-bottom: 25px;">
-                            <form class="search-form row g-2" [formGroup]="searchForm" (ngSubmit)="searchDepartmentByName()">
-                              <div class="col-md-5" style="position:absolute; right:0px; top:35px;">
-                                <input type="text" [formControlName]="'departmentName'" name="departmentName"
-                                 placeholder="Pesquise pelo departamento" title="Insira o nome do departmento">
-                                <button type="submit" title="Pesquisar" ><i class="bi bi-search"></i></button>
-                              </div>
+                            <form class="search-form row g-2" [formGroup]="searchForm"
+                                (ngSubmit)="searchDepartmentByName()">
+                                <div class="col-md-5" style="position:absolute; right:0px; top:35px;">
+                                    <input type="text" [formControlName]="'departmentName'" name="departmentName"
+                                        placeholder="Pesquise pelo departamento" title="Insira o nome do departmento">
+                                    <button type="submit" title="Pesquisar"><i class="bi bi-search"></i></button>
+                                </div>
                             </form>
-                          </div>
+                        </div>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -68,12 +71,13 @@
                                     <td>{{department.shortName}}</td>
                                     <td>28</td>
                                     <td>
-                                        <button style="width: 40px; margin-right: 2px;" class="bi bi-person-square btn btn-info"
-                                        title="Ver Departamento"></button>
-                                      <button style="width: 40px; margin-right: 2px;" class="bi bi-trash btn btn-danger"
-                                        title="Deletar"></button>
-                                      <button style="width: 40px;" 
-                                        class="bi bi-pencil-square btn btn-warning" title="Editar"></button></td>
+                                        <button style="width: 40px; margin-right: 2px;"
+                                            class="bi bi-person-square btn btn-info" title="Ver Departamento"></button>
+                                        <button style="width: 40px; margin-right: 2px;"
+                                            class="bi bi-trash btn btn-danger" title="Deletar"></button>
+                                        <button style="width: 40px;" class="bi bi-pencil-square btn btn-warning"
+                                           (click)="fillForm(department.id)" title="Editar"></button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

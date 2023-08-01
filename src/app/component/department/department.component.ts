@@ -16,6 +16,7 @@ export class DepartmentComponent implements OnInit {
   departments!: Department[];
   departmentRequest!: DepartmentRequest;
   departmentForm!: FormGroup;
+  departmentId!: Number;
   searchForm!: FormGroup;
   searchRequest!: SearchRequest;
   name!: string;
@@ -41,16 +42,30 @@ export class DepartmentComponent implements OnInit {
   }
 
   public createDepartment() {
+    this.departmentId = this.departmentForm.controls['id'].value;
     if (this.departmentForm.valid) {
-      this.departmentService.createDepartment(this.mapToRequest()).subscribe(data => {
-        this.toastr.success(data.responseMessage);
-        this.getAllDepartments();
-        this.cleanForm()
-      },
-        error => {
-          this.toastr.error('Ocorreu um erro ao salvar departamento!')
-          console.error(error);
-        })
+      if (this.departmentId != null && this.departmentId.toString().length != 0) {
+        this.departmentService.updateDepartment(this.departmentId, this.mapToRequest()).subscribe(data => {
+          this.toastr.success(data.responseMessage);
+          this.getAllDepartments();
+          this.cleanForm();
+        },
+          error => {
+            this.toastr.error('Ocorreu um erro ao actualizar departamento');
+            console.error(error.message);
+          })
+      } else {
+        this.departmentService.createDepartment(this.mapToRequest()).subscribe(data => {
+          this.toastr.success(data.responseMessage);
+          this.getAllDepartments();
+          this.cleanForm()
+        },
+          error => {
+            this.toastr.error('Ocorreu um erro ao salvar departamento!')
+            console.error(error);
+          }
+        )
+      }
     } else {
       this.toastr.warning('Preencha devidamente o formulário')
     }
@@ -75,7 +90,21 @@ export class DepartmentComponent implements OnInit {
       }, error => {
         this.toastr.error('Ocorreu ao pesquisar departamentos!');
         console.error(error.message);
-        
+
+      })
+    }
+  }
+
+  public fillForm(id: any) {
+    if (id !== null) {
+      this.departmentService.getDepartmentById(id).subscribe(response => {
+        this.departmentForm = new FormGroup({
+          id: new FormControl({ value: response.id, disabled: true }),
+          name: new FormControl(response.name, Validators.required),
+          shortName: new FormControl(response.shortName, Validators.required)
+        })
+      }, error => {
+        console.error(error);
       })
     }
   }
