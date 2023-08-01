@@ -28,7 +28,11 @@ export class DepartmentService {
     return this.http.get<any>(AppConstants.baseServer + "/department/id/" + id);
   }
 
-  updateDepartment(id: any, deparment: DepartmentRequest): Observable<any>{
+  updateDepartment(id: any, deparment: DepartmentRequest): Observable<any> {
     return this.http.put(AppConstants.baseServer + "/department/" + id, deparment);
+  }
+
+  deleteDepartment(id: any): Observable<any> {
+    return this.http.delete(AppConstants.baseServer + "/department/" + id, { responseType: 'text' });
   }
 }
