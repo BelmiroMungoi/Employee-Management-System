@@ -16,22 +16,22 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Adicionar Departamento</h5>
-                        <form class="row g-3">
+                        <form class="row g-3" [formGroup]="departmentForm" (ngSubmit)="createDepartment()">
                             <div class="col-12">
                                 <label for="id" class="form-label">ID</label>
-                                <input type="text" class="form-control" id="id">
+                                <input type="text" [formControlName]="'id'" class="form-control" id="id">
                             </div>
                             <div class="col-12">
                                 <label for="name" class="form-label">Nome do Departamento</label>
-                                <input type="text" class="form-control" id="name">
+                                <input type="text" [formControlName]="'name'" class="form-control" id="name">
                             </div>
                             <div class="col-12">
                                 <label for="abrev" class="form-label">Abreviacão</label>
-                                <input type="text" class="form-control" id="abrev">
+                                <input type="text" [formControlName]="'shortName'" class="form-control" id="abrev">
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary" style="margin-right: 3px; width: 95px;">Salvar</button>
-                                <button type="reset" class="btn btn-warning" style="width: 95px;">Cancelar</button>
+                                <button type="reset" class="btn btn-warning" style="width: 95px;" (click)="cleanForm()">Cancelar</button>
                             </div>
                         </form>
                     </div>
@@ -46,7 +46,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Nome</th>
                                     <th scope="col">Abreviacão</th>
                                     <th scope="col">Quant.</th>
@@ -54,14 +54,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Recursos Humanos</td>
-                                    <td>RH</td>
+                                <tr *ngFor="let department of departments; let i = index">
+                                    <th scope="row">{{department.id}}</th>
+                                    <td>{{department.name}}</td>
+                                    <td>{{department.shortName}}</td>
                                     <td>28</td>
                                     <td>
                                         <button style="width: 40px; margin-right: 2px;" class="bi bi-person-square btn btn-info"
-                                        title="Ver Perfil"></button>
+                                        title="Ver Departamento"></button>
                                       <button style="width: 40px; margin-right: 2px;" class="bi bi-trash btn btn-danger"
                                         title="Deletar"></button>
                                       <button style="width: 40px;" 
