@@ -12,7 +12,7 @@ import { RegisterComponent } from './auth/register/register.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderInterceptorModule } from './service/header-interceptor.service';
 import { EmployeeComponent } from './component/employee/employee.component';
-import { DeparmentComponent } from './component/deparment/deparment.component';
+import { DepartmentComponent } from './component/department/department.component';
 import { MissionComponent } from './component/mission/mission.component';
 import { EmployeeAddComponent } from './component/employee-add/employee-add.component';
 
@@ -23,7 +23,7 @@ import { EmployeeAddComponent } from './component/employee-add/employee-add.comp
     LoginComponent,
     RegisterComponent,
     EmployeeComponent,
-    DeparmentComponent,
+    DepartmentComponent,
     MissionComponent,
     EmployeeAddComponent
   ],
