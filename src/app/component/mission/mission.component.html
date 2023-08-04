@@ -1,1 +1,97 @@
-<p>mission works!</p>
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Projecto/Missão</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+                <li class="breadcrumb-item">Projecto/Missão</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-4">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Adicionar Projecto</h5>
+                        <form class="row g-3">
+                            <div class="col-12">
+                                <label for="id" class="form-label">ID</label>
+                                <input type="text" class="form-control" id="id">
+                            </div>
+                            <div class="col-12">
+                                <label for="name" class="form-label">Nome do Projecto</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="col-12">
+                                <label for="abrev" class="form-label">Data de Finalizacão</label>
+                                <input type="text" class="form-control" id="abrev">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="abrev" class="form-label">Status do Projecto</label>
+                                <select id="mission"  class="form-select">
+                                    <option selected>Status</option>
+                                    <option >Aberto</option>
+                                </select>
+                            </div> 
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary"
+                                    style="margin-right: 3px; width: 95px;">Salvar</button>
+                                <button type="reset" class="btn btn-warning" style="width: 95px;">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Lista de Projectos</h5>
+                        <div class="search-bar" style="margin-bottom: 25px;">
+                            <form class="search-form row g-2">
+                                <div class="col-md-5" style="position:absolute; right:0px; top:35px;">
+                                    <input type="text" name="missionName"
+                                        placeholder="Pesquise pelo projecto" title="Insira o nome do departmento">
+                                    <button type="submit" title="Pesquisar"><i class="bi bi-search"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Nome do Projecto</th>
+                                    <th scope="col">Início</th>
+                                    <th scope="col">Termíno</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Accões</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let mission of missionResponse">
+                                    <th scope="row">{{mission.id}}</th>
+                                    <td>{{mission.missionName}}</td>
+                                    <td>{{mission.startedDate}}</td>
+                                    <td>{{mission.finishedDate}}</td>
+                                    <td>{{mission.missionStatus}}</td>
+                                    <td>
+                                        <button style="width: 40px; margin-right: 2px;"
+                                            class="bi bi-person-square btn btn-info" title="Ver Departamento"></button>
+                                        <button style="width: 40px; margin-right: 2px;"
+                                            class="bi bi-trash btn btn-danger" title="Deletar"></button>
+                                        <button style="width: 40px;" class="bi bi-pencil-square btn btn-warning"
+                                            title="Editar"></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
