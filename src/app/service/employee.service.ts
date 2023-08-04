@@ -4,7 +4,6 @@ import { EmployeeRequestPayload } from '../model/employee-request.payload';
 import { Observable } from 'rxjs';
 import { AppConstants } from '../app-constants';
 import { EmployeeResponsePayload } from '../model/employee-response.payload';
-import { SearchRequest } from '../model/search-request.payload';
 
 @Injectable({
   providedIn: 'root'

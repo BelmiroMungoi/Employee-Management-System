@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from './login.service';
 
@@ -8,12 +8,19 @@ import { LoginService } from './login.service';
 })
 export class GuardianGuard implements CanActivate {
 
-  constructor(private userService: LoginService) {}
+  constructor(private userService: LoginService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    return this.userService.isAuthenticated();
+    const isUserAuthenticated = this.userService.isAuthenticated();
+
+    if (isUserAuthenticated) {
+      return true;
+    } else {
+      this.router.navigate(['login']);
+    }
+    return true;
   }
 
 

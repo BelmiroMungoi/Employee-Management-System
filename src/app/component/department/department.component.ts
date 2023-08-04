@@ -97,7 +97,6 @@ export class DepartmentComponent implements OnInit {
 
   public deleteDepartment(id: any) {
     this.departmentId = id;
-    console.info(id)
     if (this.departmentId != null && this.departmentId.toString().length != 0) {
       this.departmentService.deleteDepartment(this.departmentId).subscribe(response => {
         this.toastr.success(response);
