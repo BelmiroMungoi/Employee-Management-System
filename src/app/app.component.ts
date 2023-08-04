@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit{
   title = 'Employee-Management-System';
 
-  constructor() {}
+  constructor(private router: Router) {}
   ngOnInit(): void {
     this.toggleSideBar();
   }
@@ -21,6 +21,11 @@ export class AppComponent implements OnInit{
     } else {
       return true;
     }
+  }
+
+  public logOut() {
+    localStorage.clear();
+    this.router.navigate(['login'])
   }
 
    public toggleSideBar() {    
