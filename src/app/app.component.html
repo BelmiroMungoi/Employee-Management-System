@@ -38,7 +38,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" (click)="logOut()">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sair</span>
               </a>
@@ -55,7 +55,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link" routerLink="/home" routerLinkActive="active-link">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -67,12 +67,12 @@
         </a>
         <ul id="funcionario-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a routerLink="/employee">
+            <a routerLink="/employee" routerLinkActive="active">
               <i class="bi bi-circle"></i><span>Visualizar</span>
             </a>
           </li>
           <li>
-            <a routerLink="/employeeAdd">
+            <a routerLink="/employeeAdd" routerLinkActive="active">
               <i class="bi bi-circle"></i><span>Adicionar</span>
             </a>
           </li>
@@ -90,7 +90,7 @@
         </a>
         <ul id="departamento-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a routerLink="/department">
+            <a routerLink="/department" routerLinkActive="active">
               <i class="bi bi-circle"></i><span>Adicionar</span>
             </a>
           </li>
@@ -103,7 +103,7 @@
         </a>
         <ul id="projects-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a routerLink="/mission">
+            <a routerLink="/mission" routerLinkActive="active">
               <i class="bi bi-circle"></i><span>Adicionar</span>
             </a>
           </li>
