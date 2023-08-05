@@ -19,4 +19,8 @@ export class MissionService {
   getAllMission(): Observable<MissionResponsePayload[]> {
     return this.http.get<MissionResponsePayload[]>(AppConstants.baseServer + "/mission/");
   }
+
+  getAllStatus(): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/mission/status");
+  }
 }
