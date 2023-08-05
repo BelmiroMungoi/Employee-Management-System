@@ -1,6 +1,6 @@
 export class MissionRequestPayload {
 
     missionName!: string;
-    finishedDate!: string;
+    finishedDate!: Date;
     missionStatus!: string;
 }
