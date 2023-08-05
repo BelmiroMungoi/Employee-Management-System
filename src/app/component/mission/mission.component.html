@@ -16,24 +16,24 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Adicionar Projecto</h5>
-                        <form class="row g-3">
+                        <form class="row g-3" [formGroup]="missionForm" (ngSubmit)="createMission()">
                             <div class="col-12">
                                 <label for="id" class="form-label">ID</label>
-                                <input type="text" class="form-control" id="id">
+                                <input type="text" [formControlName]="'id'" class="form-control" id="id">
                             </div>
                             <div class="col-12">
                                 <label for="name" class="form-label">Nome do Projecto</label>
-                                <input type="text" class="form-control" id="name">
+                                <input type="text" [formControlName]="'missionName'" placeholder="Insira o nome do Projecto" class="form-control" id="name">
                             </div>
                             <div class="col-12">
-                                <label for="abrev" class="form-label">Data de Finalizacão</label>
-                                <input type="text" class="form-control" id="abrev">
+                                <label for="finishedDate" class="form-label">Data de Finalizacão</label>
+                                <input type="date" [formControlName]="'finishedDate'" class="form-control" id="finishedDate">
                             </div>
                             <div class="col-md-12">
-                                <label for="abrev" class="form-label">Status do Projecto</label>
-                                <select id="mission"  class="form-select">
-                                    <option selected>Status</option>
-                                    <option >Aberto</option>
+                                <label for="status" class="form-label">Status do Projecto</label>
+                                <select id="status" [formControlName]="'missionStatus'" class="form-select">
+                                    <option selected>Status do Projecto</option>
+                                    <option *ngFor="let status of missionStatus">{{status.missionStatus}}</option>
                                 </select>
                             </div> 
                             <div class="text-center">
@@ -76,10 +76,10 @@
                                     <td>{{mission.missionName}}</td>
                                     <td>{{mission.startedDate}}</td>
                                     <td>{{mission.finishedDate}}</td>
-                                    <td>{{mission.missionStatus}}</td>
+                                    <td>{{mission.missionStatus.missionStatus}}</td>
                                     <td>
                                         <button style="width: 40px; margin-right: 2px;"
-                                            class="bi bi-person-square btn btn-info" title="Ver Departamento"></button>
+                                            class="bi bi-eye-fill btn btn-info" title="Ver Detalhes do Projecto"></button>
                                         <button style="width: 40px; margin-right: 2px;"
                                             class="bi bi-trash btn btn-danger" title="Deletar"></button>
                                         <button style="width: 40px;" class="bi bi-pencil-square btn btn-warning"
