@@ -21,12 +21,7 @@ export class EmployeeComponent implements OnInit {
   name!: string;
   total!: number;
 
-  constructor(private employeeService: EmployeeService, private toastr: ToastrService) {
-    this.searchRequest = {
-      firstname: '',
-      departmentName: ''
-    }
-  }
+  constructor(private employeeService: EmployeeService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.getAllEmployees();
