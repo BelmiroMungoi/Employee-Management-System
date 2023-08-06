@@ -17,6 +17,9 @@ export class MissionComponent implements OnInit {
   missionRequest!: MissionRequestPayload;
   missionStatus!: StatusResponsePayload[];
   missionForm!: FormGroup;
+  searchForm!: FormGroup;
+  missionId!: Number;
+  name!: string;
 
   constructor(private missionService: MissionService, private toastr: ToastrService) {
     this.missionRequest = {
@@ -35,18 +38,33 @@ export class MissionComponent implements OnInit {
       finishedDate: new FormControl('', Validators.required),
       missionStatus: new FormControl('', Validators.required)
     })
+    this.searchForm = new FormGroup({
+      missionName: new FormControl('')
+    })
   }
 
   public createMission() {
+    this.missionId = this.missionForm.controls['id'].value;
     if (this.missionForm.valid) {
-      this.missionService.createMission(this.mapToRequest()).subscribe(response => {
-        this.toastr.success(response.responseMessage);
-        this.getAllMission();
-        this.cleanForm();
-      }, error => {
-        this.toastr.error('Ocorreu um erro ao criar um novo projecto!')
-        console.error(error);
-      })
+      if (this.missionId != null && this.missionId.toString().length != 0) {
+        this.missionService.updateMission(this.mapToRequest(), this.missionId).subscribe(response => {
+          this.toastr.success(response.responseMessage);
+          this.getAllMission();
+          this.cleanForm();
+        }, error => {
+          this.toastr.error('Ocorreu um erro ao actualizar missão');
+          console.error(error);
+        })
+      } else {
+        this.missionService.createMission(this.mapToRequest()).subscribe(response => {
+          this.toastr.success(response.responseMessage);
+          this.getAllMission();
+          this.cleanForm();
+        }, error => {
+          this.toastr.error('Ocorreu um erro ao criar um novo projecto!')
+          console.error(error);
+        })
+      }
     } else {
       this.toastr.warning('Preencha devidamente o formulário')
     }
@@ -70,8 +88,51 @@ export class MissionComponent implements OnInit {
     })
   }
 
-  private cleanForm() {
+  public searchAllMissionByName() {
+    this.name = this.searchForm.get('missionName')?.value;
+    if (this.name == null || this.name == '') {
+      this.getAllMission();
+    } else {
+      this.missionService.getAllMissionByName(this.name).subscribe(response => {
+        this.missionResponse = response;
+      }, error => {
+        this.toastr.error("Ocorreu um erro ao pesquisar projectos!");
+        console.error(error);
+      })
+    }
+  }
+
+  public deleteMission(id: any) {
+    this.missionId = id;
+    if (this.missionId != null && this.missionId.toString().length != 0) {
+      this.missionService.deleteMission(this.missionId).subscribe(response => {
+        this.getAllMission();
+        this.toastr.success(response);
+      }, error => {
+        this.toastr.error('Ocorreu um erro ao eliminar missão!');
+        console.error(error);
+      })
+    }
+  }
+
+  public cleanForm() {
     this.missionForm.reset();
+  }
+
+  public fillForm(id: any) {
+    if (id !== null) {
+      this.missionService.getMissionById(id).subscribe(response => {
+        this.missionForm = new FormGroup({
+          id: new FormControl({ value: response.id, disabled: true }),
+          missionName: new FormControl(response.missionName, Validators.required),
+          finishedDate: new FormControl(response.finishedDate, Validators.required),
+          missionStatus: new FormControl(response.missionStatus.missionStatus, Validators.required)
+        })
+        console.info(response);
+      }, error => {
+        console.error(error);
+      })
+    }
   }
 
   private mapToRequest(): MissionRequestPayload {
