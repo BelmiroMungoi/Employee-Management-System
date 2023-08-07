@@ -42,7 +42,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let employee of employees; let i = index">
+                <tr *ngFor="let employee of employees |  paginate: { itemsPerPage: 8, currentPage: page, totalItems: total}; let i = index">
                   <th scope="row">{{employee.id}}</th>
                   <td>{{employee.firstname}}</td>
                   <td>{{employee.lastname}}</td>
@@ -61,7 +61,9 @@
               </tbody>
             </table>
             <!-- End Table with stripped rows -->
-
+            <div class="text-center">
+              <pagination-controls (pageChange)="loadPage(page = $event)" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+            </div>
           </div>
         </div>
 
