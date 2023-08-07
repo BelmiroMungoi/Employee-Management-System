@@ -16,8 +16,12 @@ export class EmployeeService {
     return this.http.post(AppConstants.baseServer + "/employee/", employee);
   }
 
-  getAllEmployee(): Observable<EmployeeResponsePayload[]> {
-    return this.http.get<EmployeeResponsePayload[]>(AppConstants.baseServer + "/employee/");
+  getAllEmployee(): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/employee/");
+  }
+
+  getAllEmployeePerPage(page: any): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/employee/page/" + page)
   }
 
   getEmployeeById(id: any): Observable<any> {
