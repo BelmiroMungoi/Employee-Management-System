@@ -15,6 +15,7 @@ import { EmployeeComponent } from './component/employee/employee.component';
 import { DepartmentComponent } from './component/department/department.component';
 import { MissionComponent } from './component/mission/mission.component';
 import { EmployeeAddComponent } from './component/employee-add/employee-add.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { EmployeeAddComponent } from './component/employee-add/employee-add.comp
     HttpClientModule,
     ToastrModule.forRoot(),
     NgbModule, 
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
