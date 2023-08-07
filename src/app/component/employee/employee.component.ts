@@ -20,6 +20,7 @@ export class EmployeeComponent implements OnInit {
   searchRequest!: SearchRequest;
   name!: string;
   total!: number;
+  page!: any;
 
   constructor(private employeeService: EmployeeService, private toastr: ToastrService) {}
 
@@ -31,15 +32,25 @@ export class EmployeeComponent implements OnInit {
   }
 
   public getAllEmployees() {
-    this.employeeService.getAllEmployee().subscribe(
-      (response: EmployeeResponsePayload[]) => {
-        this.employees = response;
+    this.employeeService.getAllEmployee().subscribe(response => {
+        this.employees = response.content;
+        this.total = response.totalElements;
       },
       (error: HttpErrorResponse) => {
         this.toastr.error("Ocorreu um erro ao carregar a lista de funcionários!")
         console.info(error.message);
       }
     );
+  }
+
+  public loadPage(page: any) {
+    this.name = this.searchForm.get('firstname')?.value;
+    if (this.name == null || this.name == '') {
+      this.employeeService.getAllEmployeePerPage(page - 1).subscribe(response => {
+        this.employees = response.content;
+        this.total = response.totalElements;
+      })
+    }
   }
 
   public searchEmployeeByFirstname() {
