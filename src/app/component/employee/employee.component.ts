@@ -50,18 +50,26 @@ export class EmployeeComponent implements OnInit {
         this.employees = response.content;
         this.total = response.totalElements;
       })
+    } else {
+      this.employeeService.getEmployeeByFirstnamePerPage(this.name, page - 1).subscribe(response => {
+        this.employees = response.content;
+        this.total = response.totalElements;
+      })
     }
   }
 
   public searchEmployeeByFirstname() {
     this.name = this.searchForm.get('firstname')?.value;
     if (this.name == null || this.name == '') {
-      this.getAllEmployees();
+      this.employeeService.getAllEmployeePerPage(0).subscribe(response => {
+        this.employees = response.content;
+        this.total = response.totalElements;
+      })
 
     } else {
       this.employeeService.getEmployeeByFirstname(this.name).subscribe(response => {
-        this.employees = response;
-        console.info(response);
+        this.employees = response.content;
+        this.total = response.totalElements;
       }, error => {
         this.toastr.error("Ocorreu um erro ao pesquisar funcionário!");
         console.error(error.message);

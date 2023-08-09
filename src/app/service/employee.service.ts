@@ -39,4 +39,8 @@ export class EmployeeService {
   getEmployeeByFirstname(name: String): Observable<any> {
     return this.http.get<any>(AppConstants.baseServer + "/employee/name/" + name);
   }
+
+  getEmployeeByFirstnamePerPage(name: String, page: any): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/employee/name/" + name + "/page/" + page);
+  }
 }

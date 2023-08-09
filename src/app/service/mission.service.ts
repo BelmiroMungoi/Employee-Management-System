@@ -16,8 +16,8 @@ export class MissionService {
     return this.http.post(AppConstants.baseServer + "/mission/", mission);
   }
 
-  getAllMission(): Observable<MissionResponsePayload[]> {
-    return this.http.get<MissionResponsePayload[]>(AppConstants.baseServer + "/mission/");
+  getAllMission(page: any): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/mission/page/" + page);
   }
 
   getAllStatus(): Observable<any> {
@@ -28,8 +28,8 @@ export class MissionService {
     return this.http.get<any>(AppConstants.baseServer + "/mission/get/" + id);
   }
 
-  getAllMissionByName(name: string): Observable<any> {
-    return this.http.get<any>(AppConstants.baseServer + "/mission/name/" + name);
+  getAllMissionByName(name: string, page: any): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/mission/name/" + name + "/page/" + page);
   }
 
   updateMission(mission: MissionRequestPayload, id: any): Observable<any> {

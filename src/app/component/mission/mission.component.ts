@@ -19,6 +19,8 @@ export class MissionComponent implements OnInit {
   missionForm!: FormGroup;
   searchForm!: FormGroup;
   missionId!: Number;
+  total!: number;
+  page!: number;
   name!: string;
 
   constructor(private missionService: MissionService, private toastr: ToastrService) {
@@ -71,8 +73,9 @@ export class MissionComponent implements OnInit {
   }
 
   public getAllMission() {
-    this.missionService.getAllMission().subscribe(response => {
-      this.missionResponse = response;
+    this.missionService.getAllMission(0).subscribe(response => {
+      this.missionResponse = response.content;
+      this.total = response.totalElements;
     }, error => {
       this.toastr.error("Ocorreu um erro ao carregar a lista de projectos!");
       console.error(error);
@@ -93,8 +96,9 @@ export class MissionComponent implements OnInit {
     if (this.name == null || this.name == '') {
       this.getAllMission();
     } else {
-      this.missionService.getAllMissionByName(this.name).subscribe(response => {
-        this.missionResponse = response;
+      this.missionService.getAllMissionByName(this.name, 0).subscribe(response => {
+        this.missionResponse = response.content;
+        this.total = response.totalElements;
       }, error => {
         this.toastr.error("Ocorreu um erro ao pesquisar projectos!");
         console.error(error);
@@ -117,6 +121,18 @@ export class MissionComponent implements OnInit {
 
   public cleanForm() {
     this.missionForm.reset();
+  }
+
+  public loadPage(page: any) {
+    this.name = this.searchForm.get('missionName')?.value;
+    if (this.name == null || this.name == '') {
+      this.getAllMission();
+    } else {
+      this.missionService.getAllMissionByName(this.name, page - 1).subscribe(response => {
+        this.missionResponse = response.content;
+        this.total = response.totalElements;
+      })
+    }
   }
 
   public fillForm(id: any) {

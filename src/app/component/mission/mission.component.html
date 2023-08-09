@@ -71,7 +71,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let mission of missionResponse">
+                                <tr *ngFor="let mission of missionResponse | paginate: { itemsPerPage: 8, currentPage: page, totalItems: total}">
                                     <th scope="row">{{mission.id}}</th>
                                     <td>{{mission.missionName}}</td>
                                     <td>{{mission.startedDate}}</td>
@@ -88,7 +88,9 @@
                                 </tr>
                             </tbody>
                         </table>
-
+                        <div class="text-center">
+                            <pagination-controls (pageChange)="loadPage(page = $event)" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+                          </div>
                     </div>
                 </div>
             </div>
