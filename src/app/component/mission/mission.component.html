@@ -23,11 +23,13 @@
                             </div>
                             <div class="col-12">
                                 <label for="name" class="form-label">Nome do Projecto</label>
-                                <input type="text" [formControlName]="'missionName'" placeholder="Insira o nome do Projecto" class="form-control" id="name">
+                                <input type="text" [formControlName]="'missionName'"
+                                    placeholder="Insira o nome do Projecto" class="form-control" id="name">
                             </div>
                             <div class="col-12">
                                 <label for="finishedDate" class="form-label">Data de Finalizacão</label>
-                                <input type="date" [formControlName]="'finishedDate'" class="form-control" id="finishedDate">
+                                <input type="date" [formControlName]="'finishedDate'" class="form-control"
+                                    id="finishedDate">
                             </div>
                             <div class="col-md-12">
                                 <label for="status" class="form-label">Status do Projecto</label>
@@ -35,11 +37,12 @@
                                     <option selected>Status do Projecto</option>
                                     <option *ngFor="let status of missionStatus">{{status.missionStatus}}</option>
                                 </select>
-                            </div> 
+                            </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary"
                                     style="margin-right: 3px; width: 95px;">Salvar</button>
-                                <button type="reset" class="btn btn-warning" style="width: 95px;" (click)="cleanForm()">Cancelar</button>
+                                <button type="reset" class="btn btn-warning" style="width: 95px;"
+                                    (click)="cleanForm()">Cancelar</button>
                             </div>
                         </form>
                     </div>
@@ -51,8 +54,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Lista de Projectos</h5>
                         <div class="search-bar" style="margin-bottom: 25px;">
-                            <form [formGroup]="searchForm" (ngSubmit)="searchAllMissionByName()" class="search-form row g-2">
-                                <div class="col-md-5"  style="position:absolute; right:0px; top:35px;">
+                            <form [formGroup]="searchForm" (ngSubmit)="searchAllMissionByName()"
+                                class="search-form row g-2">
+                                <div class="col-md-5" style="position:absolute; right:0px; top:35px;">
                                     <input type="text" name="missionName" [formControlName]="'missionName'"
                                         placeholder="Pesquise pelo projecto" title="Insira o nome do departmento">
                                     <button type="submit" title="Pesquisar"><i class="bi bi-search"></i></button>
@@ -71,7 +75,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let mission of missionResponse | paginate: { itemsPerPage: 8, currentPage: page, totalItems: total}">
+                                <tr
+                                    *ngFor="let mission of missionResponse | paginate: { itemsPerPage: 8, currentPage: page, totalItems: total}">
                                     <th scope="row">{{mission.id}}</th>
                                     <td>{{mission.missionName}}</td>
                                     <td>{{mission.startedDate}}</td>
@@ -79,18 +84,20 @@
                                     <td>{{mission.missionStatus.missionStatus}}</td>
                                     <td>
                                         <button style="width: 40px; margin-right: 2px;"
-                                            class="bi bi-eye-fill btn btn-info" title="Ver Detalhes do Projecto"></button>
-                                        <button style="width: 40px; margin-right: 2px;" (click)="deleteMission(mission.id)"
-                                            class="bi bi-trash btn btn-danger" title="Deletar"></button>
+                                            class="bi bi-eye-fill btn btn-info"
+                                            title="Ver Detalhes do Projecto"></button>
+                                        <button style="width: 40px; margin-right: 2px;"
+                                            (click)="deleteMission(mission.id)" class="bi bi-trash btn btn-danger"
+                                            title="Deletar"></button>
                                         <button style="width: 40px;" class="bi bi-pencil-square btn btn-warning"
-                                           (click)="fillForm(mission.id)" title="Editar"></button>
+                                            (click)="fillForm(mission.id)" title="Editar"></button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="text-center">
-                            <pagination-controls (pageChange)="loadPage(page = $event)" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
-                          </div>
+                            <pagination-controls (pageChange)="loadPage(page = $event)" previousLabel="Anterior"nextLabel="Próximo"></pagination-controls>
+                        </div>
                     </div>
                 </div>
             </div>

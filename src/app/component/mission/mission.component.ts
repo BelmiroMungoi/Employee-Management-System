@@ -126,7 +126,10 @@ export class MissionComponent implements OnInit {
   public loadPage(page: any) {
     this.name = this.searchForm.get('missionName')?.value;
     if (this.name == null || this.name == '') {
-      this.getAllMission();
+      this.missionService.getAllMission(page - 1).subscribe(response => {
+        this.missionResponse = response.content;
+        this.total = response.totalElements;
+      })
     } else {
       this.missionService.getAllMissionByName(this.name, page - 1).subscribe(response => {
         this.missionResponse = response.content;
