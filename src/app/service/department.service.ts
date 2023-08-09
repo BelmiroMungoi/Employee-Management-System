@@ -16,12 +16,16 @@ export class DepartmentService {
     return this.http.post(AppConstants.baseServer + "/department/", deparment);
   }
 
-  getAllDepartments(): Observable<Department[]> {
-    return this.http.get<Department[]>(AppConstants.baseServer + "/department/");
+  getAllDepartment(): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/department/");
   }
 
-  getAllDepartmentByName(name: String): Observable<any> {
-    return this.http.get<any>(AppConstants.baseServer + "/department/" + name);
+  getAllDepartments(page: any): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/department/page/" + page);
+  }
+
+  getAllDepartmentByName(name: String, page: any): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/department/" + name + "/page/" + page);
   }
 
   getDepartmentById(id: any): Observable<any> {

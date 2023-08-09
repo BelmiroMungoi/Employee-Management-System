@@ -20,6 +20,8 @@ export class DepartmentComponent implements OnInit {
   searchForm!: FormGroup;
   searchRequest!: SearchRequest;
   name!: string;
+  page!: number;
+  total!: number;
 
   constructor(private departmentService: DepartmentService, private toastr: ToastrService) {
     this.departmentRequest = {
@@ -72,8 +74,9 @@ export class DepartmentComponent implements OnInit {
   }
 
   public getAllDepartments() {
-    this.departmentService.getAllDepartments().subscribe(response => {
-      this.departments = response;
+    this.departmentService.getAllDepartments(0).subscribe(response => {
+      this.departments = response.content;
+      this.total = response.totalElements;
     }, error => {
       this.toastr.error('Ocorreu um erro ao carregar a lista de departamentos!');
       console.error(error.message)
@@ -85,8 +88,9 @@ export class DepartmentComponent implements OnInit {
     if (this.name == null || this.name == '') {
       this.getAllDepartments();
     } else {
-      this.departmentService.getAllDepartmentByName(this.name).subscribe(response => {
-        this.departments = response;
+      this.departmentService.getAllDepartmentByName(this.name, 0).subscribe(response => {
+        this.departments = response.content;
+        this.total = response.totalElements;
       }, error => {
         this.toastr.error('Ocorreu ao pesquisar departamentos!');
         console.error(error.message);
@@ -104,6 +108,21 @@ export class DepartmentComponent implements OnInit {
       }, error => {
         this.toastr.error('Ocorreu um erro ao eliminar departamento');
         console.error(error.message);
+      })
+    }
+  }
+
+  public loadPage(page: any) {
+    this.name = this.searchForm.get('departmentName')?.value;
+    if (this.name == null || this.name == '') {
+      this.departmentService.getAllDepartments(page - 1).subscribe(response => {
+        this.departments = response.content;
+        this.total = response.totalElements;
+      })
+    } else {
+      this.departmentService.getAllDepartmentByName(this.name, page).subscribe(response => {
+        this.departments = response.content;
+        this.total = response.totalElements;
       })
     }
   }
