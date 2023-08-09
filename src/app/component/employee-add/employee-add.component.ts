@@ -69,7 +69,7 @@ export class EmployeeAddComponent implements OnInit {
   }
 
   public getAllDepartments() {
-    this.departmentService.getAllDepartments().subscribe((response) => {
+    this.departmentService.getAllDepartment().subscribe((response) => {
       this.departments = response;
     }, error => {
       this.toastr.error('Ocorreu um erro ao interno ao carregar a lista de departamento!');
