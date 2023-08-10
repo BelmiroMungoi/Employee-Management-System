@@ -32,6 +32,10 @@ export class MissionService {
     return this.http.get<any>(AppConstants.baseServer + "/mission/name/" + name + "/page/" + page);
   }
 
+  getMissionQuantity(): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/mission/quantity");
+  }
+
   updateMission(mission: MissionRequestPayload, id: any): Observable<any> {
     return this.http.put(AppConstants.baseServer + "/mission/" + id, mission);
   }
