@@ -47,4 +47,8 @@ export class EmployeeService {
   getEmployeeQuantity(): Observable<any> {
     return this.http.get<any>(AppConstants.baseServer + "/employee/quantity");
   }
+
+  downloadPdfReport() {
+    return this.http.get(AppConstants.baseServer + "/employee/report", { responseType: 'text' });
+  }
 }
