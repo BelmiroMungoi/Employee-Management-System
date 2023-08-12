@@ -40,7 +40,7 @@ export class HeaderInterceptorService implements HttpInterceptor{
     } else {
       errorMessage = 'Código: ' + error.error.code + error.error.error;
     }
-    this.toastr.warning(errorMessage);
+    console.error(errorMessage);
     return throwError(errorMessage);
   }
 }
