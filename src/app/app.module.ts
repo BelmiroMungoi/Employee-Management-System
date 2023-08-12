@@ -16,6 +16,10 @@ import { DepartmentComponent } from './component/department/department.component
 import { MissionComponent } from './component/mission/mission.component';
 import { EmployeeAddComponent } from './component/employee-add/employee-add.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { EmployeeReportComponent } from './component/employee-report/employee-report.component';
+import { DepartmentReportComponent } from './component/department-report/department-report.component';
+import { MissionReportComponent } from './component/mission-report/mission-report.component';
+import { UserProfileComponent } from './component/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     EmployeeComponent,
     DepartmentComponent,
     MissionComponent,
-    EmployeeAddComponent
+    EmployeeAddComponent,
+    EmployeeReportComponent,
+    DepartmentReportComponent,
+    MissionReportComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
