@@ -8,10 +8,17 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit{
   title = 'Employee-Management-System';
+  firstname!: any;
+  lastname!: any;
+  email!: any;
+  isEnabled!: any;
+  role!: any;
 
   constructor(private router: Router) {}
+
   ngOnInit(): void {
     this.toggleSideBar();
+    this.getUserDetails();
   }
 
   public hideMenu() {
@@ -23,8 +30,17 @@ export class AppComponent implements OnInit{
     }
   }
 
+  public getUserDetails() {
+    this.firstname = sessionStorage.getItem('firstname'); 
+    this.lastname = sessionStorage.getItem('lastname');
+    this.email = sessionStorage.getItem('email');
+    this.isEnabled = sessionStorage.getItem('isEnabled');
+    this.role = sessionStorage.getItem('role');
+  }
+
   public logOut() {
     localStorage.clear();
+    sessionStorage.clear();
     this.router.navigate(['login'])
   }
 
