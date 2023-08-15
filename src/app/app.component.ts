@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ImageService } from './service/image.service';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +14,16 @@ export class AppComponent implements OnInit{
   email!: any;
   isEnabled!: any;
   role!: any;
+  base64Data!: any;
+  retrieveResponse!: any;
+  url = "";
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private imageService: ImageService) {}
 
   ngOnInit(): void {
     this.toggleSideBar();
     this.getUserDetails();
+    this.showImage();
   }
 
   public hideMenu() {
@@ -31,11 +36,27 @@ export class AppComponent implements OnInit{
   }
 
   public getUserDetails() {
-    this.firstname = sessionStorage.getItem('firstname'); 
-    this.lastname = sessionStorage.getItem('lastname');
-    this.email = sessionStorage.getItem('email');
-    this.isEnabled = sessionStorage.getItem('isEnabled');
-    this.role = sessionStorage.getItem('role');
+    this.firstname = localStorage.getItem('firstname'); 
+    this.lastname = localStorage.getItem('lastname');
+    this.email = localStorage.getItem('email');
+    this.isEnabled = localStorage.getItem('enabled');
+    this.role = localStorage.getItem('role');
+  }
+
+  public getImage() {
+    this.imageService.downloadImage().subscribe(response => {
+      this.retrieveResponse = response;
+      this.base64Data = this.retrieveResponse.image;
+      this.url= 'data:' + this.retrieveResponse.fileType + ';base64,' + this.base64Data;
+    })
+  }
+
+  public showImage() {
+    if (this.getImage() == null) {
+      this.url = "./assets/img/default-profile.png";
+    } else {
+      this.getImage();
+    }
   }
 
   public logOut() {
