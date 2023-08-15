@@ -32,14 +32,14 @@ export class LoginComponent implements OnInit {
 
       this.loginService.login(this.loginRequest).subscribe((data) => {
         localStorage.setItem("access_token", data.access_token);
-        sessionStorage.setItem("firstname", data.user.firstname);
-        sessionStorage.setItem("lastname", data.user.lastname);
-        sessionStorage.setItem("email", data.user.email);
-        sessionStorage.setItem("isEnabled", data.user.isEnabled)
-        sessionStorage.setItem("role", data.user.role);
+        localStorage.setItem("userId", data.user.userId);
+        localStorage.setItem("firstname", data.user.firstname);
+        localStorage.setItem("lastname", data.user.lastname);
+        localStorage.setItem("email", data.user.email);
+        localStorage.setItem("enabled", data.user.enabled)
+        localStorage.setItem("role", data.user.role);
         this.router.navigate(['home'])
         this.toastr.success("Bem-vindo ao sistema");
-        console.log(data);
       },
         error => {
           this.toastr.error("Email ou Palavra-Passe estão incorretos!");
