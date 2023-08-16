@@ -15,6 +15,10 @@ export class UserService {
     return this.http.get<any>(AppConstants.baseServer + "/user/quantity");
   }
 
+  getUserById(): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/user/get");
+  }
+
   updateUser(request: RegisterRequestPayload): Observable<any> {
     return this.http.put(AppConstants.baseServer + "/user/", request);
   }
