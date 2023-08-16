@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Department } from 'src/app/model/department.payload';
 import { EmployeeRequestPayload } from 'src/app/model/employee-request.payload';
+import { PositionPayload } from 'src/app/model/position.payload';
 import { DepartmentService } from 'src/app/service/department.service';
 import { EmployeeService } from 'src/app/service/employee.service';
 
@@ -18,6 +19,7 @@ export class EmployeeAddComponent implements OnInit {
   employeeRequest!: EmployeeRequestPayload;
   departments!: Department[];
   employeeId!: Number;
+  positions!: PositionPayload[];
 
   constructor(private employeeService: EmployeeService, private departmentService: DepartmentService,
     private activatedRoute: ActivatedRoute, private toastr: ToastrService) {
@@ -77,6 +79,15 @@ export class EmployeeAddComponent implements OnInit {
     })
   }
 
+  public getAllPositions() {
+    this.employeeService.getAllPosition().subscribe(response => {
+      this.positions = response;
+    }, error => {
+      this.toastr.error('Ocorreu um erro ao interno ao carregar a lista de cargos!');
+      console.error(error);
+    })
+  }
+
   public fillForm() {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id !== null) {
@@ -115,7 +126,7 @@ export class EmployeeAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.fillForm();
-
+    this.getAllPositions();
     this.getAllDepartments();
     this.employeeForm = new FormGroup({
       id: new FormControl({ value: '', disabled: true }),
