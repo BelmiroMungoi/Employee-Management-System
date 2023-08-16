@@ -40,15 +40,23 @@ export class UserProfileComponent implements OnInit{
     this.getUserDetails();
     this.showImage();
     this.fillForm();
+    this.userForm = new FormGroup({
+      id: new FormControl({value: '', disabled: true}),
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required)
+    });
   }
 
   public getUserDetails() {
-    this.userId = localStorage.getItem('userId');
-    this.firstname = localStorage.getItem('firstname'); 
-    this.lastname = localStorage.getItem('lastname');
-    this.email = localStorage.getItem('email');
-    this.enabled = localStorage.getItem('enabled');
-    this.role = localStorage.getItem('role');
+    this.userService.getUserById().subscribe(response => {
+      this.userId = response.userId;
+      this.firstname = response.firstname;
+      this.lastname = response.lastname;
+      this.email = response.email;
+      this.enabled = response.enabled;
+      this.role = response.role;
+    })
   }
 
   public onSelectedFile(event: any) {
@@ -68,6 +76,9 @@ export class UserProfileComponent implements OnInit{
     this.imageService.uploadImage(formData).subscribe(data => {
       this.toastr.success('Imagem foi salva com sucesso!');
       console.info(data);
+    }, error => {
+      this.toastr.error('Ocorreu um erro ao salvar imagem!');
+      console.error(error.message);
     })
   }
 
@@ -96,12 +107,14 @@ export class UserProfileComponent implements OnInit{
   }
 
   public fillForm() {
-    this.userForm = new FormGroup({
-      id: new FormControl({value: this.userId, disabled: true}),
-      firstname: new FormControl(this.firstname, Validators.required),
-      lastname: new FormControl(this.lastname, Validators.required),
-      email: new FormControl(this.email, Validators.required)
-    });
+    this.userService.getUserById().subscribe(response => {
+      this.userForm = new FormGroup({
+        id: new FormControl({value: response.userId, disabled: true}),
+        firstname: new FormControl(response.firstname, Validators.required),
+        lastname: new FormControl(response.lastname, Validators.required),
+        email: new FormControl(response.email, Validators.required)
+      });
+    })
   }
 
   public mapToRequest(): RegisterRequestPayload {

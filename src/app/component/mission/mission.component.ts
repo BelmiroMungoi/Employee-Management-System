@@ -147,7 +147,6 @@ export class MissionComponent implements OnInit {
           finishedDate: new FormControl(response.finishedDate, Validators.required),
           missionStatus: new FormControl(response.missionStatus.missionStatus, Validators.required)
         })
-        console.info(response);
       }, error => {
         console.error(error);
       })
