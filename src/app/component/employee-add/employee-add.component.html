@@ -18,39 +18,58 @@
                 <!-- No Labels Form -->
                 <form class="row g-3" [formGroup]="employeeForm" (ngSubmit)="createEmployee()">
                     <div class="col-md-4">
-                        <label for="id">ID</label>
+                        <label for="id" class="form-label">ID</label>
                         <input type="text" [formControlName]="'id'" name="id" id="id" class="form-control" title="Id">
                     </div>
                     <div class="col-md-8">
-                        <label for="cod">Código de Identificacão</label>
+                        <label for="cod" class="form-label">Código de Identificacão</label>
                         <input type="text" [formControlName]="'employeeIdentifier'" name="cod" id="cod" class="form-control" title="Código de Identificacão">
                     </div>
                     <div class="col-md-6">
-                        <input type="text" [formControlName]="'firstname'" class="form-control" placeholder="Nome" title="Nome do Funcionário">
+                        <label for="firstname" class="form-label">Nome</label>
+                        <input type="text" [formControlName]="'firstname'" name="firstname" class="form-control" placeholder="Insira o nome" title="Nome do Funcionário">
                     </div>
                     <div class="col-md-6">
-                        <input type="text" [formControlName]="'lastname'" class="form-control" placeholder="Apelido" title="Apelido do Funcionário">
+                        <label for="lastname" class="form-label">Apelido</label>
+                        <input type="text" [formControlName]="'lastname'" name="lastname" class="form-control" placeholder="Insira o apelido" title="Apelido do Funcionário">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" [formControlName]="'email'" name="email" class="form-control" placeholder="Insira o email" title="Email do Funcionário">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="birthdate" class="form-label">Data de Aniversário</label>
+                        <input type="date" [formControlName]="'birthdate'" name="birthdate" class="form-control" title="Data de Aniversário do Funcionário">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="salary" class="form-label">Salário</label>
+                        <input type="number" name="salary" class="form-control" placeholder="Insira o salário" title="Salário">
                     </div>
                     <div class="col-md-6">
-                        <input type="email" [formControlName]="'email'" class="form-control" placeholder="Email" title="Email do Funcionário">
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" [formControlName]="'birthdate'" class="form-control" placeholder="Data de Aniversário" title="Data de Aniversário do Funcionário">
-                    </div>
-                    <div class="col-md-12">
-                        <select id="department" [formControlName]="'department'" class="form-select" title="Departamento">
+                        <label for="department" class="form-label">Departamento</label>
+                        <select name="department" [formControlName]="'department'" class="form-select" title="Departamento">
                             <option selected>Selecione o departamento</option>
                             <option *ngFor="let d of departments">{{d.name}}</option>
                         </select>
-                    </div>                    
+                    </div>    
+                    <div class="col-md-6">
+                        <label for="cargo" class="form-label">Cargo</label>
+                        <select name="cargo" class="form-select" title="Cargo">
+                            <option selected>Selecione o cargo</option>
+                            <option *ngFor="let p of positions">{{p.positionName}}</option>
+                        </select>
+                    </div>              
                     <div class="col-md-4">
-                        <input type="text" [formControlName]="'street'" class="form-control" placeholder="Rua" title="Rua da Moradia do Funcionário">
+                        <label for="street" class="form-label">Rua</label>
+                        <input type="text" [formControlName]="'street'" name="street" class="form-control" placeholder="Insira a rua da moradia" title="Rua da Moradia do Funcionário">
                     </div>
                     <div class="col-md-4">
-                        <input type="text" [formControlName]="'houseNumber'" class="form-control" placeholder="Número de casa" title="Número de Casa">
+                        <label for="houseNumber" class="form-label">Número da Casa</label>
+                        <input type="text" [formControlName]="'houseNumber'" name="houseNumber" class="form-control" placeholder="Insira o número de casa" title="Número de Casa">
                     </div>                    
                     <div class="col-md-4">
-                        <input type="text" [formControlName]="'zipCode'" class="form-control" placeholder="Código Postal" title="Código Postal">
+                        <label for="zipCode" class="form-label">Código Postal</label>
+                        <input type="text" [formControlName]="'zipCode'" name="zipCode" class="form-control" placeholder="Insira o código Postal" title="Código Postal">
                     </div>
                     <div class="col-md-4">
                         <button type="submit" class="btn btn-primary" style="margin-right: 3px; width: 95px;">Salvar</button>
