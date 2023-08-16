@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { RegisterRequestPayload } from 'src/app/model/register-request.payload';
 import { ImageService } from 'src/app/service/image.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,13 +22,24 @@ export class UserProfileComponent implements OnInit{
   base64Data!: any;
   retrieveResponse!: any;
   url = "";
+  userForm!: FormGroup;
+  userRequest!: RegisterRequestPayload;
 
 
-  constructor(private imageService: ImageService, private toastr: ToastrService) {}
+  constructor(private imageService: ImageService, private toastr: ToastrService, 
+    private userService: UserService) {
+      this.userRequest = {
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: ''
+      }
+    }
 
   ngOnInit(): void {
     this.getUserDetails();
     this.showImage();
+    this.fillForm();
   }
 
   public getUserDetails() {
@@ -71,6 +85,30 @@ export class UserProfileComponent implements OnInit{
     } else {
       this.getImage();
     }
+  }
+
+  public updateUser() {
+    this.userService.updateUser(this.mapToRequest()).subscribe(response => {
+      this.toastr.success(response.responseMessage);
+    }, error => {
+      console.error(error.message);
+    })
+  }
+
+  public fillForm() {
+    this.userForm = new FormGroup({
+      id: new FormControl({value: this.userId, disabled: true}),
+      firstname: new FormControl(this.firstname, Validators.required),
+      lastname: new FormControl(this.lastname, Validators.required),
+      email: new FormControl(this.email, Validators.required)
+    });
+  }
+
+  public mapToRequest(): RegisterRequestPayload {
+    this.userRequest.firstname = this.userForm.get('firstname')?.value;
+    this.userRequest.lastname = this.userForm.get('lastname')?.value;
+    this.userRequest.email = this.userForm.get('email')?.value;
+    return this.userRequest;
   }
  
 }
