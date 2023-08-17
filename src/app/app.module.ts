@@ -20,6 +20,8 @@ import { EmployeeReportComponent } from './component/employee-report/employee-re
 import { DepartmentReportComponent } from './component/department-report/department-report.component';
 import { MissionReportComponent } from './component/mission-report/mission-report.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
+import { NgChartsModule } from 'ng2-charts';
+import { EmployeeProfileComponent } from './component/employee-profile/employee-profile.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
     EmployeeReportComponent,
     DepartmentReportComponent,
     MissionReportComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    EmployeeProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
     ToastrModule.forRoot(),
     NgbModule, 
     BrowserAnimationsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
