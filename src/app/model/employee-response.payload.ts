@@ -1,4 +1,5 @@
 import { Department } from "./department.payload";
+import { PositionPayload } from "./position.payload";
 
 export class EmployeeResponsePayload {
 
@@ -8,7 +9,9 @@ export class EmployeeResponsePayload {
     lastname!: string;
     email!: string;
     birthdate!: Date;
+    salary!: any;
     department!: Department;
+    positionResponse!: PositionPayload;
     street!: string;
     houseNumber!: string;
     zipCode!: string;
