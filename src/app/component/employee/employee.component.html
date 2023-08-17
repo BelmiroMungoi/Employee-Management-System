@@ -51,7 +51,7 @@
                   <td>{{employee.department.name}}</td>
                   <td>
                     <button style="width: 40px; margin-right: 2px;" class="bi bi-person-square btn btn-info"
-                      title="Ver Perfil"></button>
+                      [routerLink]="['/employeeProfile', employee.id]" title="Ver Perfil"></button>
                     <button style="width: 40px; margin-right: 2px;" class="bi bi-trash btn btn-danger"
                       (click)="deleteEmployee(employee.id, i)" title="Deletar"></button>
                     <button style="width: 40px;" [routerLink]="['/employeeAdd', employee.id]"
