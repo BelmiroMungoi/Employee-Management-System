@@ -1,0 +1,109 @@
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Detalhes do Departamento</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+                <li class="breadcrumb-item"><a routerLink="/department">Departamento</a></li>
+                <li class="breadcrumb-item">Detalhes</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Detalhes do Departamento</h2>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 label">Nome do departamento:</div>
+                            <div class="col-lg-6 col-md-6">{{departmentName}}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 label">Abreviacão:</div>
+                            <div class="col-lg-6 col-md-6">{{shortName}}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 label">Funcionários alocados:</div>
+                            <div class="col-lg-6 col-md-6">{{quantity}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body pt-3">
+                        <!-- Bordered Tabs -->
+                        <ul class="nav nav-tabs nav-tabs-bordered">
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab"
+                                    data-bs-target="#profile-overview">Lista de funcionários</button>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                <div class="search-bar" style="margin-bottom: 25px;">
+                                    <form class="search-form row g-2">
+                                        <div class="col-md-5" style=" margin-left:20px; position:absolute; right:0px; top:35px;">
+                                            <input type="text" name="firstname" placeholder="Pesquisa por nome" title="Insira o nome">
+                                            <button type="button" title="Pesquisar"><i class="bi bi-search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- Table with stripped rows -->
+                                <table id="datatable" class="table datatable table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nome</th>
+                                            <th scope="col">Apelido</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Data de Aniverário</th>
+                                            <th scope="col">Cargo</th>
+                                            <th scope="col">Accões</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let employee of employees |  paginate: { itemsPerPage: 8, currentPage: page, totalItems: total}; let i = index">
+                                            <th scope="row">{{employee.id}}</th>
+                                            <td>{{employee.firstname}}</td>
+                                            <td>{{employee.lastname}}</td>
+                                            <td>{{employee.email}}</td>
+                                            <td>{{employee.birthdate}}</td>
+                                            <td>{{employee.positionResponse.positionName}}</td>
+                                            <td>
+                                                <button style="width: 40px; margin-right: 2px;"
+                                                    class="bi bi-person-square btn btn-info"
+                                                    [routerLink]="['/employeeProfile', employee.id]"
+                                                    title="Ver Perfil"></button>
+                                                <button style="width: 40px;"
+                                                    [routerLink]="['/employeeAdd', employee.id]"
+                                                    class="bi bi-pencil-square btn btn-warning" title="Editar"></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="text-center">
+                                    <!-- End Table with stripped rows -->
+                                    <pagination-controls previousLabel="Anterior"
+                                        nextLabel="Próximo"></pagination-controls>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
