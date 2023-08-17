@@ -49,10 +49,14 @@ export class EmployeeService {
   }
 
   getAllPosition(): Observable<any> {
-    return this.http.get<any>(AppConstants.baseServer + "/employee/position")
+    return this.http.get<any>(AppConstants.baseServer + "/employee/position");
   }
 
   downloadPdfReport() {
     return this.http.get(AppConstants.baseServer + "/employee/report", { responseType: 'text' });
+  }
+
+  loadChart(): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/employee/chart");
   }
 }
