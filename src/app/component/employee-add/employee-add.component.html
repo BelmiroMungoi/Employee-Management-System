@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="salary" class="form-label">Salário</label>
-                        <input type="number" name="salary" class="form-control" placeholder="Insira o salário" title="Salário">
+                        <input type="number" [formControlName]="'salary'" name="salary" class="form-control" placeholder="Insira o salário" title="Salário">
                     </div>
                     <div class="col-md-6">
                         <label for="department" class="form-label">Departamento</label>
@@ -54,7 +54,7 @@
                     </div>    
                     <div class="col-md-6">
                         <label for="cargo" class="form-label">Cargo</label>
-                        <select name="cargo" class="form-select" title="Cargo">
+                        <select name="cargo" [formControlName]="'position'" class="form-select" title="Cargo">
                             <option selected>Selecione o cargo</option>
                             <option *ngFor="let p of positions">{{p.positionName}}</option>
                         </select>
