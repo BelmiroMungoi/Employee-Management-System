@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { UserChartPayload } from 'src/app/model/userChart.payload';
 import { DepartmentService } from 'src/app/service/department.service';
 import { EmployeeService } from 'src/app/service/employee.service';
 import { MissionService } from 'src/app/service/mission.service';
 import { UserService} from 'src/app/service/user.service';
+import { ChartOptions, ChartType, ChartData, ChartDataset } from 'chart.js';
 
 @Component({
   selector: 'app-home',
@@ -15,12 +17,25 @@ export class HomeComponent implements OnInit {
   department!: number;
   mission!: number;
   user!: number;
+  employeeChart = new UserChartPayload();
+  barChartOptions: ChartOptions = {
+    responsive: true,
+  };
+  barChartLabels: any;
+  barChartType: ChartType = 'bar';
+  barChartLegend = true;
+  barChartPlugins: any[] = [];
+
+  barChartData: ChartDataset[] = [
+    { data: [], label: 'Salário Funcionário' }
+  ];
 
   constructor(private employeeService: EmployeeService, private departmentService: DepartmentService,
     private missionService: MissionService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.getQuantities();
+    this.loadChart();
   }
 
   public getQuantities() {
@@ -39,5 +54,18 @@ export class HomeComponent implements OnInit {
     this.userService.getEnabledUsersQuantity().subscribe(response => {
       this.user = response;
     });
+  }
+
+  public loadChart() {
+    this.employeeService.loadChart().subscribe(response => {
+      this.employeeChart = response;
+      this.barChartLabels = this.employeeChart.firstname.split(',');
+
+      var salarys = JSON.parse('[' + this.employeeChart.salary + ']')
+
+      this.barChartData = [
+        { data: salarys, label: 'Salário Funcionário' }
+      ];
+    })
   }
 }
