@@ -71,7 +71,7 @@
                                     <td>{{department.shortName}}</td>
                                     <td>{{department.employeeQuantity}}</td>
                                     <td>
-                                        <button style="width: 40px; margin-right: 2px;"
+                                        <button style="width: 40px; margin-right: 2px;" [routerLink]="['/departmentDetails', department.id]"
                                             class="bi bi-eye-fill btn btn-info" title="Ver Departamento"></button>
                                         <button style="width: 40px; margin-right: 2px;" (click)="deleteDepartment(department.id)"
                                             class="bi bi-trash btn btn-danger" title="Deletar"></button>
