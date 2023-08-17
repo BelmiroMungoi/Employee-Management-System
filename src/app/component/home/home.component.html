@@ -18,13 +18,12 @@
 
                     <div class="col-md-3">
                         <div class="card info-card">
-                            
+
                             <div class="card-body">
                                 <h5 class="card-title">Funcionários</h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon d-flex align-items-center justify-content-center">
+                                    <div class="card-icon d-flex align-items-center justify-content-center">
                                         <i class="bi bi-people"></i>
                                     </div>
                                     <div class="ps-3">
@@ -42,8 +41,7 @@
                                 <h5 class="card-title">Departamentos</h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon d-flex align-items-center justify-content-center">
+                                    <div class="card-icon d-flex align-items-center justify-content-center">
                                         <i class="bi bi-bank"></i>
                                     </div>
                                     <div class="ps-3">
@@ -60,8 +58,7 @@
                                 <h5 class="card-title">Projetos</h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon d-flex align-items-center justify-content-center">
+                                    <div class="card-icon d-flex align-items-center justify-content-center">
                                         <i class="bi bi-folder2-open"></i>
                                     </div>
                                     <div class="ps-3">
@@ -78,8 +75,7 @@
                                 <h5 class="card-title">Usuários Activos</h5>
 
                                 <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon d-flex align-items-center justify-content-center">
+                                    <div class="card-icon d-flex align-items-center justify-content-center">
                                         <i class="bi bi-person-check"></i>
                                     </div>
                                     <div class="ps-3">
@@ -94,9 +90,14 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">Gráfico</h5>
-
-                                <div id="reportsChart"></div>                               
-
+                                    <canvas baseChart 
+                                    [datasets]="barChartData" 
+                                    [labels]="barChartLabels"
+                                    [options]="barChartOptions" 
+                                    [plugins]="barChartPlugins"
+                                    [legend]="barChartLegend"
+                                    [type]="barChartType">
+                                    </canvas>
                             </div>
                         </div>
                     </div>
