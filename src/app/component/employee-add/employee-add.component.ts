@@ -28,11 +28,33 @@ export class EmployeeAddComponent implements OnInit {
       lastname: '',
       email: '',
       birthdate: '',
+      salary: '',
       department: '',
+      position: '',
       street: '',
       houseNumber: '',
       zipCode: ''
     };
+  }
+  
+  ngOnInit(): void {
+    this.fillForm();
+    this.getAllPositions();
+    this.getAllDepartments();
+    this.employeeForm = new FormGroup({
+      id: new FormControl({ value: '', disabled: true }),
+      employeeIdentifier: new FormControl({ value: '', disabled: true }),
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      birthdate: new FormControl('', Validators.required),
+      salary: new FormControl('', Validators.required),
+      department: new FormControl('', Validators.required),
+      position: new FormControl('', Validators.required),
+      street: new FormControl('', Validators.required),
+      houseNumber: new FormControl('', Validators.required),
+      zipCode: new FormControl('', Validators.required)
+    })
   }
 
   public createEmployee() {
@@ -99,7 +121,9 @@ export class EmployeeAddComponent implements OnInit {
           lastname: new FormControl(response.lastname, Validators.required),
           email: new FormControl(response.email, [Validators.required, Validators.email]),
           birthdate: new FormControl(response.birthdate, Validators.required),
+          salary: new FormControl(response.salary, Validators.required),
           department: new FormControl(response.department.name, Validators.required),
+          position: new FormControl(response.positionResponse.positionName, Validators.required),
           street: new FormControl(response.address.street, Validators.required),
           houseNumber: new FormControl(response.address.houseNumber, Validators.required),
           zipCode: new FormControl(response.address.zipCode, Validators.required)
@@ -113,7 +137,9 @@ export class EmployeeAddComponent implements OnInit {
     this.employeeRequest.lastname = this.employeeForm.get('lastname')?.value;
     this.employeeRequest.email = this.employeeForm.get('email')?.value;
     this.employeeRequest.birthdate = this.employeeForm.get('birthdate')?.value;
+    this.employeeRequest.salary = this.employeeForm.get('salary')?.value;
     this.employeeRequest.department = this.employeeForm.get('department')?.value;
+    this.employeeRequest.position = this.employeeForm.get('position')?.value;
     this.employeeRequest.street = this.employeeForm.get('street')?.value;
     this.employeeRequest.houseNumber = this.employeeForm.get('houseNumber')?.value;
     this.employeeRequest.zipCode = this.employeeForm.get('zipCode')?.value;
@@ -124,21 +150,4 @@ export class EmployeeAddComponent implements OnInit {
     this.employeeForm.reset();
   }
 
-  ngOnInit(): void {
-    this.fillForm();
-    this.getAllPositions();
-    this.getAllDepartments();
-    this.employeeForm = new FormGroup({
-      id: new FormControl({ value: '', disabled: true }),
-      employeeIdentifier: new FormControl({ value: '', disabled: true }),
-      firstname: new FormControl('', Validators.required),
-      lastname: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      birthdate: new FormControl('', Validators.required),
-      department: new FormControl('', Validators.required),
-      street: new FormControl('', Validators.required),
-      houseNumber: new FormControl('', Validators.required),
-      zipCode: new FormControl('', Validators.required)
-    })
-  }
 }
