@@ -48,6 +48,10 @@ export class EmployeeService {
     return this.http.get<any>(AppConstants.baseServer + "/employee/quantity");
   }
 
+  getAllEmployeeByDepartment(department: any): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/employee/" + department);
+  }
+
   getAllPosition(): Observable<any> {
     return this.http.get<any>(AppConstants.baseServer + "/employee/position");
   }
