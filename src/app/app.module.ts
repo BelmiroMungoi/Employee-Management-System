@@ -22,6 +22,7 @@ import { MissionReportComponent } from './component/mission-report/mission-repor
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { NgChartsModule } from 'ng2-charts';
 import { EmployeeProfileComponent } from './component/employee-profile/employee-profile.component';
+import { DepartmentDetailsComponent } from './component/department-details/department-details.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { EmployeeProfileComponent } from './component/employee-profile/employee-
     DepartmentReportComponent,
     MissionReportComponent,
     UserProfileComponent,
-    EmployeeProfileComponent
+    EmployeeProfileComponent,
+    DepartmentDetailsComponent
   ],
   imports: [
     BrowserModule,
