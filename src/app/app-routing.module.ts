@@ -12,6 +12,8 @@ import { EmployeeReportComponent } from './component/employee-report/employee-re
 import { DepartmentReportComponent } from './component/department-report/department-report.component';
 import { MissionReportComponent } from './component/mission-report/mission-report.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
+import { EmployeeProfileComponent } from './component/employee-profile/employee-profile.component';
+import { DepartmentDetailsComponent } from './component/department-details/department-details.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,7 +28,9 @@ const routes: Routes = [
   { path: 'employeeReport', component: EmployeeReportComponent, canActivate: [GuardianGuard] },
   { path: 'departmentReport', component: DepartmentReportComponent, canActivate: [GuardianGuard] },
   { path: 'missionReport', component: MissionReportComponent, canActivate: [GuardianGuard] },
-  { path: 'userProfile', component: UserProfileComponent, canActivate: [GuardianGuard]}
+  { path: 'userProfile', component: UserProfileComponent, canActivate: [GuardianGuard]},
+  { path: 'employeeProfile/:id', component: EmployeeProfileComponent, canActivate: [GuardianGuard]},
+  { path: 'departmentDetails/:id', component: DepartmentDetailsComponent, canActivate: [GuardianGuard]}
 ];
 
 @NgModule({
