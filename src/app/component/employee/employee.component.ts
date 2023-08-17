@@ -2,8 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs';
-import { DataTable } from 'simple-datatables';
 import { EmployeeResponsePayload } from 'src/app/model/employee-response.payload';
 import { SearchRequest } from 'src/app/model/search-request.payload';
 import { EmployeeService } from 'src/app/service/employee.service';
