@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ImageService } from './service/image.service';
+import { UserService } from './service/user.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit{
   retrieveResponse!: any;
   url = "";
 
-  constructor(private router: Router, private imageService: ImageService) {}
+  constructor(private router: Router, private imageService: ImageService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.toggleSideBar();
@@ -36,11 +37,12 @@ export class AppComponent implements OnInit{
   }
 
   public getUserDetails() {
-    this.firstname = localStorage.getItem('firstname'); 
-    this.lastname = localStorage.getItem('lastname');
-    this.email = localStorage.getItem('email');
-    this.isEnabled = localStorage.getItem('enabled');
-    this.role = localStorage.getItem('role');
+    this.userService.getUserById().subscribe(response => {
+      this.firstname = response.firstname;
+      this.lastname = response.lastname;
+      this.email = response.email;
+      this.role = response.role;
+    })
   }
 
   public getImage() {
