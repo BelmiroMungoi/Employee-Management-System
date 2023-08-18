@@ -23,6 +23,7 @@ import { UserProfileComponent } from './component/user-profile/user-profile.comp
 import { NgChartsModule } from 'ng2-charts';
 import { EmployeeProfileComponent } from './component/employee-profile/employee-profile.component';
 import { DepartmentDetailsComponent } from './component/department-details/department-details.component';
+import { MissionProfileComponent } from './component/mission-profile/mission-profile.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { DepartmentDetailsComponent } from './component/department-details/depar
     MissionReportComponent,
     UserProfileComponent,
     EmployeeProfileComponent,
-    DepartmentDetailsComponent
+    DepartmentDetailsComponent,
+    MissionProfileComponent
   ],
   imports: [
     BrowserModule,
