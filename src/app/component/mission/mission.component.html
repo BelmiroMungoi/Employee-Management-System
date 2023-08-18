@@ -84,7 +84,7 @@
                                     <td>{{mission.missionStatus.missionStatus}}</td>
                                     <td>
                                         <button style="width: 40px; margin-right: 2px;"
-                                            class="bi bi-eye-fill btn btn-info"
+                                           [routerLink]="['/missionProfile', mission.id]" class="bi bi-eye-fill btn btn-info"
                                             title="Ver Detalhes do Projecto"></button>
                                         <button style="width: 40px; margin-right: 2px;"
                                             (click)="deleteMission(mission.id)" class="bi bi-trash btn btn-danger"
