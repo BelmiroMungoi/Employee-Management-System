@@ -1,0 +1,80 @@
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Perfil de Usuário</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+                <li class="breadcrumb-item">Meu Perfil</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="col-xl-4">    
+              <div class="card">
+                <div class="card-body profile-card">    
+                    <h2 class="card-title">Detalhes do Projecto</h2>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 label">ID:</div>
+                        <div class="col-lg-6 col-md-6">{{missionId}}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 label">Nome do Projecto:</div>
+                        <div class="col-lg-6 col-md-6">{{missionName}}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 label">Data de Inicío:</div>
+                        <div class="col-lg-6 col-md-6">{{startedAt}}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 label">Data de Finalizacão:</div>
+                        <div class="col-lg-6 col-md-6">{{finishedAt}}</div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 label">Status do Projecto:</div>
+                        <div class="col-lg-6 col-md-6">{{missionStatus}}</div>
+                    </div>
+                </div>
+              </div>    
+            </div>
+    
+            <div class="col-xl-8">    
+              <div class="card">
+                <div class="card-body pt-3">
+                  <!-- Bordered Tabs -->
+                  <ul class="nav nav-tabs nav-tabs-bordered">    
+                    <li class="nav-item">
+                      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-employee">Lista de Funcionários</button>
+                    </li>
+
+                    <li class="nav-item">
+                      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-allocate">Allocar Funcionário</button>
+                    </li>          
+                  </ul>
+                  <div class="tab-content pt-2">
+    
+                    <div class="tab-pane fade show active profile-employee" id="profile-employee">
+                     
+                      <h5 class="card-title">Detalhes do Perfil</h5>    
+                      
+                    </div>
+    
+                    <div class="tab-pane fade profile-allocate pt-3" id="profile-allocate">
+    
+                    </div>
+    
+    
+                  </div>
+    
+                </div>
+              </div>
+    
+            </div>
+          </div>
+    </section>
+</main>
