@@ -1,121 +1,201 @@
 <main id="main" class="main">
 
-    <div class="pagetitle">
-        <h1>Perfil de Funcionário</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
-                <li class="breadcrumb-item"><a routerLink="/employee">Funcionários</a></li>
-                <li class="breadcrumb-item">Perfil do Funcionário</li>
-            </ol>
-        </nav>
-    </div>
-    <section class="section">
-        <div class="row">
-            <div class="col-xl-4">    
-              <div class="card text-center">
-                <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">    
-                  <img [src]="url" height="125" alt="Profile" class="rounded-circle">
-                  <h2>{{firstname}} {{lastname}}</h2>
-                  <h3>{{position}}</h3>
+  <div class="pagetitle">
+    <h1>Perfil de Funcionário</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+        <li class="breadcrumb-item"><a routerLink="/employee">Funcionários</a></li>
+        <li class="breadcrumb-item">Perfil do Funcionário</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="row">
+      <div class="col-xl-4">
+        <div class="card text-center">
+          <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+            <img [src]="url" height="125" alt="Profile" class="rounded-circle">
+            <h2>{{firstname}} {{lastname}}</h2>
+            <h3>{{position}}</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-8">
+        <div class="card">
+          <div class="card-body pt-3">
+            <!-- Bordered Tabs -->
+            <ul class="nav nav-tabs nav-tabs-bordered">
+              <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Visão
+                  Geral</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-project">Lista de
+                  Projectos</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-allocate">Alocar á um
+                  projecto</button>
+              </li>
+
+            </ul>
+            <div class="tab-content pt-2">
+
+              <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                <h5 class="card-title">Detalhes do Perfil</h5>
+
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 label">Id:</div>
+                  <div class="col-lg-8 col-md-6">{{id}}</div>
                 </div>
-              </div>    
-            </div>
-    
-            <div class="col-xl-8">    
-              <div class="card">
-                <div class="card-body pt-3">
-                  <!-- Bordered Tabs -->
-                  <ul class="nav nav-tabs nav-tabs-bordered">    
-                    <li class="nav-item">
-                      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Visão Geral</button>
-                    </li>
 
-                    <li class="nav-item">
-                      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-project">Lista de Projectos</button>
-                    </li>
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 label">Código de Identificacão:</div>
+                  <div class="col-lg-8 col-md-6">{{employeeIdentifier}}</div>
+                </div>
 
-                    <li class="nav-item">
-                      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-allocate">Alocar á um projecto</button>
-                    </li>
-    
-                  </ul>
-                  <div class="tab-content pt-2">
-    
-                    <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                     
-                      <h5 class="card-title">Detalhes do Perfil</h5>
-    
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6 label">Id:</div>
-                        <div class="col-lg-8 col-md-6">{{id}}</div>
-                      </div> 
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 label">Nome Completo:</div>
+                  <div class="col-lg-8 col-md-6">{{firstname}} {{lastname}}</div>
+                </div>
 
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6 label">Código de Identificacão:</div>
-                        <div class="col-lg-8 col-md-6">{{employeeIdentifier}}</div>
-                      </div> 
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 label">Email:</div>
+                  <div class="col-lg-8 col-md-6">{{email}}</div>
+                </div>
 
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6 label">Nome Completo:</div>
-                        <div class="col-lg-8 col-md-6">{{firstname}} {{lastname}}</div>
-                      </div>
-    
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6 label">Email:</div>
-                        <div class="col-lg-8 col-md-6">{{email}}</div>
-                      </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 label">Data de Aniversário:</div>
+                  <div class="col-lg-8 col-md-6">{{birthdate}}</div>
+                </div>
 
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6 label">Data de Aniversário:</div>
-                        <div class="col-lg-8 col-md-6">{{birthdate}}</div>
-                      </div> 
-    
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6 label">Cargo:</div>
-                        <div class="col-lg-8 col-md-6">{{position}}</div>
-                      </div>  
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 label">Cargo:</div>
+                  <div class="col-lg-8 col-md-6">{{position}}</div>
+                </div>
 
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6 label">Departamento:</div>
-                        <div class="col-lg-8 col-md-6">{{department}}</div>
-                      </div> 
-                      
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6 label">Salário:</div>
-                        <div class="col-lg-8 col-md-6">{{salary}}.00 MZN</div>
-                      </div> 
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 label">Departamento:</div>
+                  <div class="col-lg-8 col-md-6">{{department}}</div>
+                </div>
 
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6 label">Rua:</div>
-                        <div class="col-lg-8 col-md-6">{{street}}</div>
-                      </div> 
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 label">Salário:</div>
+                  <div class="col-lg-8 col-md-6">{{salary}}.00 MZN</div>
+                </div>
 
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6 label">Número da Casa:</div>
-                        <div class="col-lg-6 col-md-6">{{houseNumber}}</div>
-                      </div> 
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 label">Rua:</div>
+                  <div class="col-lg-8 col-md-6">{{street}}</div>
+                </div>
 
-                      <div class="row">
-                        <div class="col-lg-4 col-md-6 label">Código Postal:</div>
-                        <div class="col-lg-6 col-md-6">{{zipCode}}</div>
-                      </div> 
-                    </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 label">Número da Casa:</div>
+                  <div class="col-lg-6 col-md-6">{{houseNumber}}</div>
+                </div>
 
-                    <div class="tab-pane fade show active profile-project" id="profile-project">
-                      <h5 class="card-title">Lista de projectos onde o <b>{{firstname}}</b> participa</h5>
-                    </div>
-
-                    <div class="tab-pane fade show active" id="profile-allocate">
-                      <h5 class="card-title">Allocar um projecto ao Funcionário {{firstname}}</h5>
-                    </div>
-   
-                  </div>
-    
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 label">Código Postal:</div>
+                  <div class="col-lg-6 col-md-6">{{zipCode}}</div>
                 </div>
               </div>
-    
+
+              <div class="tab-pane fade profile-project" id="profile-project">
+                <div class="search-bar" style="margin-bottom: 25px;">
+                  <form class="search-form row g-2">
+                    <div class="col-md-5" style="position:absolute; right:0px; top:35px;">
+                      <input type="text" name="missionName" placeholder="Pesquise pelo projecto"
+                        title="Insira o nome do projecto">
+                      <button type="submit" title="Pesquisar"><i class="bi bi-search"></i></button>
+                    </div>
+                  </form>
+
+                </div>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Nome do Projecto</th>
+                      <th scope="col">Início</th>
+                      <th scope="col">Termíno</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Accões</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let mission of missions | paginate: { itemsPerPage: 8, currentPage: page, totalItems: total}">
+                      <th scope="row">{{mission.id}}</th>
+                      <td>{{mission.missionName}}</td>
+                      <td>{{mission.startedDate}}</td>
+                      <td>{{mission.finishedDate}}</td>
+                      <td>{{mission.missionStatus.missionStatus}}</td>
+                      <td>
+                        <button style="width: 40px; margin-right: 2px;" [routerLink]="['/missionProfile', mission.id]"
+                          class="bi bi-eye-fill btn btn-info" title="Ver Detalhes do Projecto"></button>
+                        <button style="width: 40px; margin-right: 2px;" class="bi bi-trash btn btn-danger"
+                          title="Remover funcionário do projecto"></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="text-center">
+                  <pagination-controls (pageChange)="loadPage(id, page = $event)" previousLabel="Anterior"
+                    nextLabel="Próximo"></pagination-controls>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="profile-allocate">
+                <div class="search-bar" style="margin-bottom: 25px; margin-top: 25px;">
+                  <form [formGroup]="searchForm" (ngSubmit)="searchAllMissionByName()" class="search-form row g-2">
+                    <div class="col-md-5" style="position:absolute; right:0px; top:65px;;">
+                      <input type="text" name="missionName" [formControlName]="'missionName'"
+                        placeholder="Pesquise pelo projecto" title="Pesquise pelo projecto">
+                      <button type="submit" title="Pesquisar"><i class="bi bi-search"></i></button>
+                    </div>
+                  </form>
+                </div>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Nome do Projecto</th>
+                      <th scope="col">Início</th>
+                      <th scope="col">Termíno</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Accões</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let mission of missionData | paginate: { itemsPerPage: 8, currentPage: page, totalItems: total}">
+                      <th scope="row">{{mission.id}}</th>
+                      <td>{{mission.missionName}}</td>
+                      <td>{{mission.startedDate}}</td>
+                      <td>{{mission.finishedDate}}</td>
+                      <td>{{mission.missionStatus.missionStatus}}</td>
+                      <td>
+                        <button (click)="addMissionToEmployee(mission.id, id)" class="bi bi-plus-square btn btn-info"
+                          title="Ver Detalhes do Projecto"> Adicionar</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="text-center">
+                  <pagination-controls previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+                </div>
+              </div>
             </div>
+
           </div>
-    </section>
+        </div>
+
+      </div>
+    </div>
+  </section>
 </main>
