@@ -58,7 +58,7 @@
                                 class="search-form row g-2">
                                 <div class="col-md-5" style="position:absolute; right:0px; top:35px;">
                                     <input type="text" name="missionName" [formControlName]="'missionName'"
-                                        placeholder="Pesquise pelo projecto" title="Insira o nome do departmento">
+                                        placeholder="Pesquise pelo projecto" title="Insira o nome do projecto">
                                     <button type="submit" title="Pesquisar"><i class="bi bi-search"></i></button>
                                 </div>
                             </form>
@@ -84,7 +84,8 @@
                                     <td>{{mission.missionStatus.missionStatus}}</td>
                                     <td>
                                         <button style="width: 40px; margin-right: 2px;"
-                                           [routerLink]="['/missionProfile', mission.id]" class="bi bi-eye-fill btn btn-info"
+                                            [routerLink]="['/missionProfile', mission.id]"
+                                            class="bi bi-eye-fill btn btn-info"
                                             title="Ver Detalhes do Projecto"></button>
                                         <button style="width: 40px; margin-right: 2px;"
                                             (click)="deleteMission(mission.id)" class="bi bi-trash btn btn-danger"
@@ -96,7 +97,8 @@
                             </tbody>
                         </table>
                         <div class="text-center">
-                            <pagination-controls (pageChange)="loadPage(page = $event)" previousLabel="Anterior"nextLabel="Próximo"></pagination-controls>
+                            <pagination-controls (pageChange)="loadPage(page = $event)" previousLabel="Anterior"
+                                nextLabel="Próximo"></pagination-controls>
                         </div>
                     </div>
                 </div>

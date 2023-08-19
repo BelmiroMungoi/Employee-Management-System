@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { EmployeeResponsePayload } from 'src/app/model/employee-response.payload';
+import { EmployeeService } from 'src/app/service/employee.service';
 import { MissionService } from 'src/app/service/mission.service';
 
 @Component({
@@ -14,8 +16,12 @@ export class MissionProfileComponent implements OnInit{
   startedAt!: any;
   finishedAt!: any;
   missionStatus!: string;
+  page!: any;
+  total!: any;
+  employees!: EmployeeResponsePayload[];
 
-  constructor(private activatedRoute: ActivatedRoute, private missionService: MissionService) {}
+  constructor(private activatedRoute: ActivatedRoute, private missionService: MissionService,
+    private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
     this.getMissionById();
@@ -29,6 +35,21 @@ export class MissionProfileComponent implements OnInit{
       this.startedAt = response.startedDate;
       this.finishedAt = response.finishedDate;
       this.missionStatus = response.missionStatus.missionStatus;
+      this.getAllEmployeeByMission(response.id);
+    })
+  }
+
+  public getAllEmployeeByMission(missionId: number) {
+    this.employeeService.getAllEmployeeByMissionId(missionId, 0).subscribe(response => {
+      this.employees = response.content;
+      this.total = response.totalElements;
+    })
+  }
+
+  public loadPage(missionId: any, page: any) {
+    this.employeeService.getAllEmployeeByMissionId(missionId, page - 1).subscribe(response => {
+      this.employees = response.content;
+      this.total = response.totalElements;
     })
   }
 
