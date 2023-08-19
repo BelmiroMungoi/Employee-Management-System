@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EmployeeResponsePayload } from 'src/app/model/employee-response.payload';
@@ -11,7 +12,7 @@ import { MissionService } from 'src/app/service/mission.service';
   templateUrl: './employee-profile.component.html',
   styleUrls: ['./employee-profile.component.css']
 })
-export class EmployeeProfileComponent implements OnInit{
+export class EmployeeProfileComponent implements OnInit {
 
   id!: Number;
   employeeIdentifier!: string;
@@ -26,17 +27,22 @@ export class EmployeeProfileComponent implements OnInit{
   houseNumber!: string;
   zipCode!: string;
   missions!: MissionResponsePayload[];
+  missionData!: MissionResponsePayload[];
   total!: number;
   page!: any;
+  name!: any;
+  searchForm!: FormGroup;
   url = "./assets/img/default-profile.png";
 
 
   constructor(private employeeService: EmployeeService, private toastr: ToastrService,
-    private missionService: MissionService, private activatedRoute: ActivatedRoute){}
+    private missionService: MissionService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getEmployeeById();
-    this.addMissionToEmployee();
+    this.searchForm = new FormGroup({
+      missionName: new FormControl('')
+    })
   }
 
   public getEmployeeById() {
@@ -68,20 +74,35 @@ export class EmployeeProfileComponent implements OnInit{
     })
   }
 
-  public loadPage(employeeId: any, page: any) { 
+  public loadPage(employeeId: any, page: any) {
     this.missionService.getAllMissionByEmployeeId(employeeId, page - 1).subscribe(response => {
       this.missions = response.content;
       this.total = response.totalElements;
     })
   }
 
-  public addMissionToEmployee() {
-    this.employeeService.addMissionToEmployee(9 ,30 ,0).subscribe(response => {
+  public addMissionToEmployee(missionId: number, employeeId: any) {
+    this.employeeService.addMissionToEmployee(missionId, employeeId, 0).subscribe(response => {
+      this.getAllMissionByEmployeeId(employeeId);
       this.toastr.success(response.responseMessage);
+      this.missionData = new Array;
+      this.searchForm.reset();
     }, error => {
-      this.toastr.error("Este funcionário já está alocado á um projecto!")
+      this.toastr.error("Este funcionário já está alocado á este um projecto!")
       console.error(error.message);
     })
+  }
+
+  public searchAllMissionByName() {
+    this.name = this.searchForm.get('missionName')?.value;
+    this.missionService.getAllMissionByName(this.name, 0).subscribe(response => {
+      this.missionData = response.content;
+      this.total = response.totalElements;
+    }, error => {
+      this.toastr.error("Ocorreu um erro ao pesquisar projectos!");
+      console.error(error);
+    })
+
   }
 
 }
