@@ -21,10 +21,10 @@ export class AppComponent implements OnInit{
 
   constructor(private router: Router, private imageService: ImageService, private userService: UserService) {}
 
-  ngOnInit(): void {
-    this.toggleSideBar();
+  ngOnInit(): void {    
     this.getUserDetails();
     this.showImage();
+    this.toggleSideBar();
   }
 
   public hideMenu() {
@@ -32,6 +32,8 @@ export class AppComponent implements OnInit{
       localStorage.getItem('access_token')?.toString().trim() != null) {
         return false;
     } else {
+      this.getUserDetails();
+      this.getImage();
       return true;
     }
   }
