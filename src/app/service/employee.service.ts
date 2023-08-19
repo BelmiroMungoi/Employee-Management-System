@@ -52,6 +52,10 @@ export class EmployeeService {
     return this.http.get<any>(AppConstants.baseServer + "/employee/" + department);
   }
 
+  getAllEmployeeByMissionId(missionId: number, page: number): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/employee/mission/" + missionId + "/page/" + page);
+  }
+
   getAllPosition(): Observable<any> {
     return this.http.get<any>(AppConstants.baseServer + "/employee/position");
   }
@@ -62,5 +66,9 @@ export class EmployeeService {
 
   loadChart(): Observable<any> {
     return this.http.get<any>(AppConstants.baseServer + "/employee/chart");
+  }
+
+  addMissionToEmployee(missionId: number, employeeId: number, body: any): Observable<any> {
+    return this.http.put(AppConstants.baseServer + "/employee/mission/" + missionId + "/employee/" + employeeId, body);
   }
 }
