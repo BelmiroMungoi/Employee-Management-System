@@ -32,6 +32,10 @@ export class MissionService {
     return this.http.get<any>(AppConstants.baseServer + "/mission/name/" + name + "/page/" + page);
   }
 
+  getAllMissionByEmployeeId(employeeId: number, page: any) {
+    return this.http.get<any>(AppConstants.baseServer + "/mission/employee/" + employeeId + "/page/" + page);
+  }
+
   getMissionQuantity(): Observable<any> {
     return this.http.get<any>(AppConstants.baseServer + "/mission/quantity");
   }
