@@ -46,11 +46,11 @@
                   <!-- Bordered Tabs -->
                   <ul class="nav nav-tabs nav-tabs-bordered">    
                     <li class="nav-item">
-                      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-employee">Lista de Funcionários</button>
+                      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-employee">Lista de Funcionários no Projecto</button>
                     </li>
 
                     <li class="nav-item">
-                      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-allocate">Allocar Funcionário</button>
+                      <button class="nav-link" (click)="getAllEmployeeWithoutMission(missionId)" data-bs-toggle="tab" data-bs-target="#profile-allocate">Alocar Funcionário</button>
                     </li>          
                   </ul>
                   <div class="tab-content pt-2">
@@ -102,9 +102,46 @@
                     </div>
     
                     <div class="tab-pane fade profile-allocate pt-3" id="profile-allocate">
-    
-                    </div>
-    
+                      <div class="search-bar" style="margin-bottom: 25px;">
+                        <form class="search-form row g-2">
+                          <div class="col-md-5" style=" margin-left:20px; position:absolute; right:0px; top:35px;">
+                            <input type="text" name="firstname" placeholder="Pesquisa por nome" title="Insira o nome">
+                            <button type="submit" title="Pesquisar"><i class="bi bi-search"></i></button>
+                          </div>
+                        </form>
+                      </div>
+                      <!-- Table with stripped rows -->
+                      <table id="datatable" class="table datatable table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Apelido</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">Departamento</th>
+                            <th scope="col">Accões</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let employee of employeesWithoutMission |  paginate: { itemsPerPage: 8, currentPage: page, totalItems: totall};">
+                            <th scope="row">{{employee.id}}</th>
+                            <td>{{employee.firstname}}</td>
+                            <td>{{employee.lastname}}</td>
+                            <td>{{employee.email}}</td>
+                            <td>{{employee.positionResponse.positionName}}</td>
+                            <td>{{employee.department.name}}</td>
+                            <td>                             
+                              <button (click)="addEmployeeToMission(employee.id, missionId)" class="bi bi-plus-square btn btn-info" title="Adicionar ao Projecto"> Adicionar</button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- End Table with stripped rows -->
+                      <div class="text-center">
+                        <pagination-controls (pageChange)="loadPageWhithout(missionId, page = $event)"  previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+                      </div>
+                    </div>    
     
                   </div>
     
