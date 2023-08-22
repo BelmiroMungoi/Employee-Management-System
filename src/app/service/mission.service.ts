@@ -47,4 +47,8 @@ export class MissionService {
   deleteMission(id: Number): Observable<any> {
     return this.http.delete(AppConstants.baseServer + "/mission/" + id, {responseType: 'text'});
   }
+
+  addEmployeeToMission(missionId: number, employeeId: number, body: any): Observable<any> {
+    return this.http.put(AppConstants.baseServer + "/mission/employee/" + employeeId + "/mission/" + missionId, body);
+  }
 }
