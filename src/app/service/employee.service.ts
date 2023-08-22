@@ -56,6 +56,10 @@ export class EmployeeService {
     return this.http.get<any>(AppConstants.baseServer + "/employee/mission/" + missionId + "/page/" + page);
   }
 
+  getAllEmployeeWithoutThatMission(missionId: number, page: number): Observable<any> {
+    return this.http.get<any>(AppConstants.baseServer + "/employee/missionId/" + missionId + "/page/" + page);
+  }
+
   getAllPosition(): Observable<any> {
     return this.http.get<any>(AppConstants.baseServer + "/employee/position");
   }

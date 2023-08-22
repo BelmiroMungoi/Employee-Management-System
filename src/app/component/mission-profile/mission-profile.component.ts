@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { EmployeeResponsePayload } from 'src/app/model/employee-response.payload';
 import { EmployeeService } from 'src/app/service/employee.service';
 import { MissionService } from 'src/app/service/mission.service';
@@ -18,10 +19,12 @@ export class MissionProfileComponent implements OnInit{
   missionStatus!: string;
   page!: any;
   total!: any;
+  totall!: any;
   employees!: EmployeeResponsePayload[];
+  employeesWithoutMission!: EmployeeResponsePayload[];
 
   constructor(private activatedRoute: ActivatedRoute, private missionService: MissionService,
-    private employeeService: EmployeeService) {}
+    private employeeService: EmployeeService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.getMissionById();
@@ -43,12 +46,38 @@ export class MissionProfileComponent implements OnInit{
     this.employeeService.getAllEmployeeByMissionId(missionId, 0).subscribe(response => {
       this.employees = response.content;
       this.total = response.totalElements;
+      console.log(response);
+    })
+  }
+
+  public getAllEmployeeWithoutMission(missionId: number) {
+    this.employeeService.getAllEmployeeWithoutThatMission(missionId, 0).subscribe(response => {
+      this.employeesWithoutMission = response.content;
+      this.totall = response.totalElements;
+    })
+  }
+
+  public addEmployeeToMission(employeeId: any, missionId: number) {
+    this.missionService.addEmployeeToMission(missionId, employeeId, 0).subscribe(response => {
+      this.toastr.success(response.responseMessage);
+      this.getAllEmployeeWithoutMission(missionId);
+      this.getAllEmployeeByMission(missionId);
+    }, error => {
+      this.toastr.error("Este funcionário já está alocado á este um projecto!")
+      console.error(error.message);
     })
   }
 
   public loadPage(missionId: any, page: any) {
     this.employeeService.getAllEmployeeByMissionId(missionId, page - 1).subscribe(response => {
       this.employees = response.content;
+      this.total = response.totalElements;
+    })
+  }
+
+  public loadPageWhithout(missionId: any, page: any) {
+    this.employeeService.getAllEmployeeWithoutThatMission(missionId, page - 1).subscribe(response => {
+      this.employeesWithoutMission = response.content;
       this.total = response.totalElements;
     })
   }
