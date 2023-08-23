@@ -113,7 +113,7 @@ export class MissionComponent implements OnInit {
         this.getAllMission();
         this.toastr.success(response);
       }, error => {
-        this.toastr.error('Ocorreu um erro ao eliminar missão!');
+        this.toastr.error('ATENCÃO, você não pode eliminar esse projecto! Mude o seu status');
         console.error(error);
       })
     }

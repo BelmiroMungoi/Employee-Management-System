@@ -106,7 +106,7 @@ export class DepartmentComponent implements OnInit {
         this.toastr.success(response);
         this.getAllDepartments();
       }, error => {
-        this.toastr.error('Ocorreu um erro ao eliminar departamento');
+        this.toastr.error('Você não pode eliminar um departamento com funcionários!');
         console.error(error.message);
       })
     }
