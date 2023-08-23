@@ -19,7 +19,7 @@ export class HeaderInterceptorService implements HttpInterceptor{
 
       return next.handle(tokenRequest).pipe(tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse && (event.status === 200 || event.status === 201)) {
-          console.info("Sucesso na operacão")
+          //console.info("Sucesso na operacão")
         }
       }),
         catchError(this.processError)

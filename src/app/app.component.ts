@@ -8,7 +8,7 @@ import { UserService } from './service/user.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'Employee-Management-System';
   firstname!: any;
   lastname!: any;
@@ -19,9 +19,9 @@ export class AppComponent implements OnInit{
   retrieveResponse!: any;
   url = "";
 
-  constructor(private router: Router, private imageService: ImageService, private userService: UserService) {}
+  constructor(private router: Router, private imageService: ImageService, private userService: UserService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.getUserDetails();
     this.showImage();
     this.toggleSideBar();
@@ -29,11 +29,9 @@ export class AppComponent implements OnInit{
 
   public hideMenu() {
     if (localStorage.getItem('access_token') != null &&
-      localStorage.getItem('access_token')?.toString().trim() != null) {
-        return false;
+      localStorage.getItem('access_token')?.toString().trim() != null) {      
+      return false;
     } else {
-      this.getUserDetails();
-      this.getImage();
       return true;
     }
   }
@@ -51,7 +49,7 @@ export class AppComponent implements OnInit{
     this.imageService.downloadImage().subscribe(response => {
       this.retrieveResponse = response;
       this.base64Data = this.retrieveResponse.image;
-      this.url= 'data:' + this.retrieveResponse.fileType + ';base64,' + this.base64Data;
+      this.url = 'data:' + this.retrieveResponse.fileType + ';base64,' + this.base64Data;
     })
   }
 
@@ -69,7 +67,7 @@ export class AppComponent implements OnInit{
     this.router.navigate(['login'])
   }
 
-   public toggleSideBar() {    
+  public toggleSideBar() {
     const select = (el: any, all = false) => {
       el = el.trim()
       if (all) {
@@ -78,7 +76,7 @@ export class AppComponent implements OnInit{
         return document.querySelector(el)
       }
     }
-  
+
     /**
      * Easy event listener function
      */
@@ -91,7 +89,7 @@ export class AppComponent implements OnInit{
     }
 
     if (select('.toggle-sidebar-btn')) {
-      on('click', '.toggle-sidebar-btn', function(e: any) {
+      on('click', '.toggle-sidebar-btn', function (e: any) {
         select('body').classList.toggle('toggle-sidebar')
       })
     }
