@@ -5,6 +5,7 @@ import { EmployeeService } from 'src/app/service/employee.service';
 import { MissionService } from 'src/app/service/mission.service';
 import { UserService} from 'src/app/service/user.service';
 import { ChartOptions, ChartType, ChartData, ChartDataset } from 'chart.js';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-home',
@@ -31,11 +32,13 @@ export class HomeComponent implements OnInit {
   ];
 
   constructor(private employeeService: EmployeeService, private departmentService: DepartmentService,
-    private missionService: MissionService, private userService: UserService) { }
+    private missionService: MissionService, private userService: UserService, private app: AppComponent) { }
 
   ngOnInit(): void {
     this.getQuantities();
     this.loadChart();
+    this.app.getUserDetails();
+    this.app.getImage();
   }
 
   public getQuantities() {
