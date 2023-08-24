@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { EmployeeResponsePayload } from 'src/app/model/employee-response.payload';
 import { MissionResponsePayload } from 'src/app/model/mission-response.payload';
 import { EmployeeService } from 'src/app/service/employee.service';
+import { ImageService } from 'src/app/service/image.service';
 import { MissionService } from 'src/app/service/mission.service';
 
 @Component({
@@ -32,11 +33,13 @@ export class EmployeeProfileComponent implements OnInit {
   page!: any;
   name!: any;
   searchForm!: FormGroup;
+  selectedFile!: File;
+  base64Data!: any;
   url = "./assets/img/default-profile.png";
 
 
   constructor(private employeeService: EmployeeService, private toastr: ToastrService,
-    private missionService: MissionService, private activatedRoute: ActivatedRoute) { }
+    private missionService: MissionService, private activatedRoute: ActivatedRoute, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.getEmployeeById();
@@ -60,6 +63,8 @@ export class EmployeeProfileComponent implements OnInit {
       this.street = response.address.street;
       this.houseNumber = response.address.houseNumber;
       this.zipCode = response.address.zipCode;
+      this.base64Data = response.imageResponse.image;
+      this.url = 'data:' + response.imageResponse.fileType + ';base64,' + this.base64Data;
       this.getAllMissionByEmployeeId(response.id);
     }, error => {
       this.toastr.error('Ocorreu um erro ao carregar perfil do funcionário!');
@@ -102,7 +107,29 @@ export class EmployeeProfileComponent implements OnInit {
       this.toastr.error("Ocorreu um erro ao pesquisar projectos!");
       console.error(error);
     })
+  }
 
+  public onSelectedFile(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile)
+    if (event.target.files) {
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(this.selectedFile);
+      fileReader.onload = (e: any) => {
+        this.url = e.target.result;
+      }
+    }
+  }
+
+  public onUpload(employeeId: any) {
+    var formData = new FormData();
+    formData.append('file', this.selectedFile, this.selectedFile.name);
+    this.imageService.uploadImageForEmployee(formData, employeeId).subscribe(data => {
+      this.toastr.success(data.responseMessage);
+    }, error => {
+      this.toastr.error('Ocorreu um erro ao salvar imagem!');
+      console.error(error.message);
+    })
   }
 
 }
