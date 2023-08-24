@@ -15,10 +15,14 @@ export class ImageService {
   }
 
   uploadImageForEmployee(image: any, id: number): Observable<any> {
-    return this.http.post(AppConstants.baseServer + "/image/upload/" + id, image);
+    return this.http.put(AppConstants.baseServer + "/employee/upload/" + id, image);
   }
 
   downloadImage(): Observable<any> {
     return this.http.get<any>(AppConstants.baseServer + "/image/download/");
+  }
+
+  deleteImage(): Observable<any> {
+    return this.http.delete(AppConstants.baseServer + "/image/delete", {responseType: 'text'})
   }
 }
