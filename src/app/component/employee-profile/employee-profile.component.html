@@ -103,7 +103,22 @@
                   <div class="col-lg-4 col-md-6 label">Código Postal:</div>
                   <div class="col-lg-6 col-md-6">{{zipCode}}</div>
                 </div>
+
+                <form>
+                  <div class="row mb-3">
+                    <label for="fullName" class="col-md-6 col-lg-4 col-form-label">Imagem:</label>
+                    <div class="col-md-6 col-lg-6">
+                      <input type="file" (change)="onSelectedFile($event)" class="form-control" title="upload">
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button type="button" class="btn btn-primary bi bi-upload" style="width: 150px;"
+                      (click)="onUpload(id)" title="Salvar imagem"> Salvar</button>
+                  </div>
+                </form>
               </div>
+
+
 
               <div class="tab-pane fade profile-project" id="profile-project">
                 <div class="search-bar" style="margin-bottom: 25px;">
@@ -111,7 +126,7 @@
                     <div class="col-md-5" style="position:absolute; right:0px; top:35px;">
                       <input type="text" name="missionName" placeholder="Pesquise pelo projecto"
                         title="Insira o nome do projecto">
-                      <button type="submit" title="Pesquisar"><i class="bi bi-search"></i></button>
+                      <button type="submit" disabled title="Pesquisar"><i class="bi bi-search"></i></button>
                     </div>
                   </form>
 
