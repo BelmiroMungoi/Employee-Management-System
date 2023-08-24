@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -144,7 +145,7 @@ export class MissionComponent implements OnInit {
         this.missionForm = new FormGroup({
           id: new FormControl({ value: response.id, disabled: true }),
           missionName: new FormControl(response.missionName, Validators.required),
-          finishedDate: new FormControl(response.finishedDate, Validators.required),
+          finishedDate: new FormControl(formatDate(new Date(response.finishedDate),'YYYY-MM-dd', 'en-US'), Validators.required),
           missionStatus: new FormControl(response.missionStatus.missionStatus, Validators.required)
         })
       }, error => {

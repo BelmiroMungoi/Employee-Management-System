@@ -1,6 +1,7 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Department } from 'src/app/model/department.payload';
 import { EmployeeRequestPayload } from 'src/app/model/employee-request.payload';
@@ -22,7 +23,7 @@ export class EmployeeAddComponent implements OnInit {
   positions!: PositionPayload[];
 
   constructor(private employeeService: EmployeeService, private departmentService: DepartmentService,
-    private activatedRoute: ActivatedRoute, private toastr: ToastrService) {
+    private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router,) {
     this.employeeRequest = {
       firstname: '',
       lastname: '',
@@ -120,7 +121,7 @@ export class EmployeeAddComponent implements OnInit {
           firstname: new FormControl(response.firstname, Validators.required),
           lastname: new FormControl(response.lastname, Validators.required),
           email: new FormControl(response.email, [Validators.required, Validators.email]),
-          birthdate: new FormControl(response.birthdate, Validators.required),
+          birthdate: new FormControl(formatDate(new Date(response.birthdate).toISOString(),'YYYY-MM-dd', 'en-US'), Validators.required),
           salary: new FormControl(response.salary, Validators.required),
           department: new FormControl(response.department.name, Validators.required),
           position: new FormControl(response.positionResponse.positionName, Validators.required),
@@ -148,6 +149,7 @@ export class EmployeeAddComponent implements OnInit {
 
   public cleanForm() {
     this.employeeForm.reset();
+    this.router.navigate(['employeeAdd']);
   }
 
 }
