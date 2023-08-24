@@ -76,12 +76,12 @@
                             <img [src]="url" alt="Profile" height="150">
                             <div class="pt-2">
                               <button type="button" class="btn btn-primary bi bi-upload" (click)="onUpload()" title="Salvar imagem"></button>
-                              <button type="button" class="btn btn-danger bi bi-trash" title="Remover imagem" style="margin-left: 5px;" ></button>
+                              <button type="button" class="btn btn-danger bi bi-trash" (click)="deleteImage()" title="Remover imagem" style="margin-left: 5px;" ></button>
                               <input type="file" style="margin-top: 10px;" (change)="onSelectedFile($event)" class="form-control" title="upload">
                             </div>
                           </div>
                         </div>
-    
+                        
                         <div class="row mb-3">
                           <label for="fullName" class="col-md-4 col-lg-3 col-form-label">ID</label>
                           <div class="col-md-8 col-lg-9">

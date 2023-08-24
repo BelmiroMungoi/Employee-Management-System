@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { response } from 'express';
 import { ToastrService } from 'ngx-toastr';
+import { AppComponent } from 'src/app/app.component';
 import { RegisterRequestPayload } from 'src/app/model/register-request.payload';
 import { ImageService } from 'src/app/service/image.service';
 import { UserService } from 'src/app/service/user.service';
@@ -27,7 +29,7 @@ export class UserProfileComponent implements OnInit{
 
 
   constructor(private imageService: ImageService, private toastr: ToastrService, 
-    private userService: UserService) {
+    private userService: UserService, private app: AppComponent) {
       this.userRequest = {
         firstname: '',
         lastname: '',
@@ -75,7 +77,7 @@ export class UserProfileComponent implements OnInit{
     formData.append('file', this.selectedFile, this.selectedFile.name);
     this.imageService.uploadImage(formData).subscribe(data => {
       this.toastr.success('Imagem foi salva com sucesso!');
-      console.info(data);
+      this.app.showImage();
     }, error => {
       this.toastr.error('Ocorreu um erro ao salvar imagem!');
       console.error(error.message);
@@ -98,9 +100,21 @@ export class UserProfileComponent implements OnInit{
     }
   }
 
+  public deleteImage() {
+    this.imageService.deleteImage().subscribe(response => {
+      this.toastr.success(response);
+      this.showImage();
+      this.app.showImage();
+    }, error => {
+      this.toastr.error('Ocorreu um erro ao eliminar imagem!');
+    })
+  }
+
   public updateUser() {
     this.userService.updateUser(this.mapToRequest()).subscribe(response => {
       this.toastr.success(response.responseMessage);
+      this.getUserDetails();
+      this.app.getUserDetails();
     }, error => {
       console.error(error.message);
     })
