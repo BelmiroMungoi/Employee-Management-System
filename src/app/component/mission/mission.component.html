@@ -19,21 +19,21 @@
                         <form class="row g-3" [formGroup]="missionForm" (ngSubmit)="createMission()">
                             <div class="col-12">
                                 <label for="id" class="form-label">ID</label>
-                                <input type="text" [formControlName]="'id'" class="form-control" id="id">
+                                <input type="text" [formControlName]="'id'" class="form-control" name="id">
                             </div>
                             <div class="col-12">
                                 <label for="name" class="form-label">Nome do Projecto</label>
                                 <input type="text" [formControlName]="'missionName'"
-                                    placeholder="Insira o nome do Projecto" class="form-control" id="name">
+                                    placeholder="Insira o nome do Projecto" class="form-control" name="name">
                             </div>
                             <div class="col-12">
                                 <label for="finishedDate" class="form-label">Data de Finalizacão</label>
                                 <input type="date" [formControlName]="'finishedDate'" class="form-control"
-                                    id="finishedDate">
+                                    name="finishedDate">
                             </div>
                             <div class="col-md-12">
                                 <label for="status" class="form-label">Status do Projecto</label>
-                                <select id="status" [formControlName]="'missionStatus'" class="form-select">
+                                <select name="status" [formControlName]="'missionStatus'" class="form-select">
                                     <option selected>Status do Projecto</option>
                                     <option *ngFor="let status of missionStatus">{{status.missionStatus}}</option>
                                 </select>
