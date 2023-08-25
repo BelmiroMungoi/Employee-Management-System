@@ -21,10 +21,9 @@ export class EmployeeAddComponent implements OnInit {
   departments!: Department[];
   employeeId!: Number;
   positions!: PositionPayload[];
-  datePipe: DatePipe = new DatePipe('');
 
   constructor(private employeeService: EmployeeService, private departmentService: DepartmentService,
-    private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router,) {
+    private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router, private datePipe: DatePipe) {
     this.employeeRequest = {
       firstname: '',
       lastname: '',
@@ -122,7 +121,7 @@ export class EmployeeAddComponent implements OnInit {
           firstname: new FormControl(response.firstname, Validators.required),
           lastname: new FormControl(response.lastname, Validators.required),
           email: new FormControl(response.email, [Validators.required, Validators.email]),
-          birthdate: new FormControl(this.datePipe.transform(new Date(response.birthdate).toISOString(),'YYYY-MM-DD'), Validators.required),
+          birthdate: new FormControl(this.datePipe.transform(response.birthdate,'YYYY-MM-DD'), Validators.required),
           salary: new FormControl(response.salary, Validators.required),
           department: new FormControl(response.department.name, Validators.required),
           position: new FormControl(response.positionResponse.positionName, Validators.required),
