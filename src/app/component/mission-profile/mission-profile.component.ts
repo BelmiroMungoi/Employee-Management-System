@@ -46,7 +46,6 @@ export class MissionProfileComponent implements OnInit{
     this.employeeService.getAllEmployeeByMissionId(missionId, 0).subscribe(response => {
       this.employees = response.content;
       this.total = response.totalElements;
-      console.log(response);
     })
   }
 

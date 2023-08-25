@@ -145,7 +145,7 @@ export class MissionComponent implements OnInit {
         this.missionForm = new FormGroup({
           id: new FormControl({ value: response.id, disabled: true }),
           missionName: new FormControl(response.missionName, Validators.required),
-          finishedDate: new FormControl(formatDate(new Date(response.finishedDate),'yyyy-MM-dd', 'en-US'), Validators.required),
+          finishedDate: new FormControl(formatDate(new Date(response.finishedDate).toDateString(),'yyyy-MM-dd', 'en-US'), Validators.required),
           missionStatus: new FormControl(response.missionStatus.missionStatus, Validators.required)
         })
         console.log(response)
