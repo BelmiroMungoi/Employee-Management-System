@@ -3,7 +3,7 @@ export class EmployeeRequestPayload {
     firstname!: string;
     lastname!: string;
     email!: string;
-    birthdate!: string;
+    birthdate!: any;
     salary!: any;
     department!: string;
     position!: string;
