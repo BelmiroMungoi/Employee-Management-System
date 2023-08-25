@@ -129,6 +129,8 @@ export class EmployeeAddComponent implements OnInit {
           houseNumber: new FormControl(response.address.houseNumber, Validators.required),
           zipCode: new FormControl(response.address.zipCode, Validators.required)
         })
+        console.log(response);
+        
       })
     }
   }
