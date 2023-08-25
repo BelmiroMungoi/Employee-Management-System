@@ -1,4 +1,4 @@
-import { formatDate } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,6 +21,7 @@ export class EmployeeAddComponent implements OnInit {
   departments!: Department[];
   employeeId!: Number;
   positions!: PositionPayload[];
+  datePipe!: DatePipe;
 
   constructor(private employeeService: EmployeeService, private departmentService: DepartmentService,
     private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router,) {
@@ -121,7 +122,7 @@ export class EmployeeAddComponent implements OnInit {
           firstname: new FormControl(response.firstname, Validators.required),
           lastname: new FormControl(response.lastname, Validators.required),
           email: new FormControl(response.email, [Validators.required, Validators.email]),
-          birthdate: new FormControl(formatDate(response.birthdate,'yyyy-MM-dd', 'en-US'), Validators.required),
+          birthdate: new FormControl(this.datePipe.transform(response.birthdate,'YYYY-MM-DD'), Validators.required),
           salary: new FormControl(response.salary, Validators.required),
           department: new FormControl(response.department.name, Validators.required),
           position: new FormControl(response.positionResponse.positionName, Validators.required),
