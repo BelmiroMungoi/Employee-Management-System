@@ -8,7 +8,7 @@ export class EmployeeResponsePayload {
     firstname!: string;
     lastname!: string;
     email!: string;
-    birthdate!: Date;
+    birthdate!: any;
     salary!: any;
     department!: Department;
     positionResponse!: PositionPayload;
