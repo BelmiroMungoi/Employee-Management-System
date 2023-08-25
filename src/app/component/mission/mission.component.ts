@@ -148,7 +148,6 @@ export class MissionComponent implements OnInit {
           finishedDate: new FormControl(formatDate(new Date(response.finishedDate.replaceFunction('/', '-')),'yyyy-MM-dd', 'en-US'), Validators.required),
           missionStatus: new FormControl(response.missionStatus.missionStatus, Validators.required)
         })
-        console.log(response)
       }, error => {
         console.error(error);
       })
