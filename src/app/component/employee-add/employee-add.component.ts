@@ -21,7 +21,7 @@ export class EmployeeAddComponent implements OnInit {
   departments!: Department[];
   employeeId!: Number;
   positions!: PositionPayload[];
-  datePipe!: DatePipe;
+  datePipe: DatePipe = new DatePipe('en-US');
 
   constructor(private employeeService: EmployeeService, private departmentService: DepartmentService,
     private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router,) {
