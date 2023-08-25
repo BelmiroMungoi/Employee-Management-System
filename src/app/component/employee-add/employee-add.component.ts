@@ -122,7 +122,7 @@ export class EmployeeAddComponent implements OnInit {
           firstname: new FormControl(response.firstname, Validators.required),
           lastname: new FormControl(response.lastname, Validators.required),
           email: new FormControl(response.email, [Validators.required, Validators.email]),
-          birthdate: new FormControl(this.datePipe.transform(response.birthdate,'YYYY-MM-DD'), Validators.required),
+          birthdate: new FormControl(this.datePipe.transform(new Date(response.birthdate),'YYYY-MM-DD'), Validators.required),
           salary: new FormControl(response.salary, Validators.required),
           department: new FormControl(response.department.name, Validators.required),
           position: new FormControl(response.positionResponse.positionName, Validators.required),
