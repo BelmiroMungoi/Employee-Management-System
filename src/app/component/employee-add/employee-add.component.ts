@@ -1,4 +1,4 @@
-import { DatePipe, formatDate } from '@angular/common';
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,7 +23,7 @@ export class EmployeeAddComponent implements OnInit {
   positions!: PositionPayload[];
 
   constructor(private employeeService: EmployeeService, private departmentService: DepartmentService,
-    private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router, private datePipe: DatePipe) {
+    private activatedRoute: ActivatedRoute, private toastr: ToastrService, private router: Router,) {
     this.employeeRequest = {
       firstname: '',
       lastname: '',
@@ -121,14 +121,14 @@ export class EmployeeAddComponent implements OnInit {
           firstname: new FormControl(response.firstname, Validators.required),
           lastname: new FormControl(response.lastname, Validators.required),
           email: new FormControl(response.email, [Validators.required, Validators.email]),
-          birthdate: new FormControl(this.datePipe.transform(response.birthdate,'YYYY-MM-DD'), Validators.required),
+          birthdate: new FormControl(formatDate(new Date(response.birthdate),'YYYY-MM-dd', 'en-US'), Validators.required),
           salary: new FormControl(response.salary, Validators.required),
           department: new FormControl(response.department.name, Validators.required),
           position: new FormControl(response.positionResponse.positionName, Validators.required),
           street: new FormControl(response.address.street, Validators.required),
           houseNumber: new FormControl(response.address.houseNumber, Validators.required),
           zipCode: new FormControl(response.address.zipCode, Validators.required)
-        })       
+        })
       })
     }
   }
