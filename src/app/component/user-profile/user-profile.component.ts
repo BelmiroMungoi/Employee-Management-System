@@ -76,8 +76,8 @@ export class UserProfileComponent implements OnInit{
     var formData = new FormData();
     formData.append('file', this.selectedFile, this.selectedFile.name);
     this.imageService.uploadImage(formData).subscribe(data => {
-      this.toastr.success('Imagem foi salva com sucesso!');
-      this.app.showImage();
+      this.toastr.success(data.body);
+      this.app.showImage();      
     }, error => {
       this.toastr.error('Ocorreu um erro ao salvar imagem!');
       console.error(error.message);
