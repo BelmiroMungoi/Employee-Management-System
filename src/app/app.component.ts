@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ImageService } from './service/image.service';
 import { UserService } from './service/user.service';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,10 @@ export class AppComponent implements OnInit {
   base64Data!: any;
   retrieveResponse!: any;
   url = "";
+  body!: any;
 
-  constructor(private router: Router, private imageService: ImageService, private userService: UserService) { }
+  constructor(private router: Router, private imageService: ImageService, private userService: UserService, 
+    private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.getUserDetails();
@@ -62,8 +65,8 @@ export class AppComponent implements OnInit {
   }
 
   public logOut() {
+    this.loginService.logOut(this.body).subscribe(data => {});
     localStorage.clear();
-    sessionStorage.clear();
     this.router.navigate(['login'])
   }
 
