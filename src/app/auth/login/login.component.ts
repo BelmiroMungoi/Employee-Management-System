@@ -32,12 +32,7 @@ export class LoginComponent implements OnInit {
 
       this.loginService.login(this.loginRequest).subscribe((data) => {
         localStorage.setItem("access_token", data.access_token);
-        localStorage.setItem("userId", data.user.userId);
-        localStorage.setItem("firstname", data.user.firstname);
-        localStorage.setItem("lastname", data.user.lastname);
-        localStorage.setItem("email", data.user.email);
-        localStorage.setItem("enabled", data.user.enabled)
-        localStorage.setItem("role", data.user.role);
+        localStorage.setItem("refresh_token", data.refresh_token);
         this.router.navigate(['home'])
         this.toastr.success("Bem-vindo ao sistema");
       },
