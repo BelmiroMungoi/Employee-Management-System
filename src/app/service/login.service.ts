@@ -15,6 +15,14 @@ export class LoginService {
     return this.http.post(AppConstants.baseLogin, userLogin);         
   } 
 
+  logOut(body: any): Observable<any> {
+    return this.http.post(AppConstants.baseServer + "/auth/logout", body);
+  }
+
+  refreshToken(body: any): Observable<any> {
+    return this.http.post(AppConstants.baseServer + "/auth/refresh_token", body)
+  }
+
   isAuthenticated() {
     if (localStorage.getItem('access_token') != null && 
     localStorage.getItem('access_token')?.toString().trim() != null) {
