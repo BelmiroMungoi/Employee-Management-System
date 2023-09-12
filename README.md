@@ -25,6 +25,11 @@ An Employee Management System designed to simplify HR operations. With a user-fr
 
 ![bandicam 2023-09-12 14-45-54-029](https://github.com/BelmiroMungoi/Crud-Rest-Angular/assets/56709665/7e36407d-23d7-49ba-aaad-ca0ad5dfdb3c)
 
+# User Profile
+
+![bandicam 2023-09-12 14-46-24-690](https://github.com/BelmiroMungoi/Crud-Rest-Angular/assets/56709665/2b131b6a-86f1-49d2-a36e-764bd793f576)
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.4.
 
 ## Development server
