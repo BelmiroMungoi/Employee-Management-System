@@ -53,9 +53,9 @@ An Employee Management System designed to simplify HR operations. With a user-fr
 
 ![bandicam 2023-09-12 14-47-31-615](https://github.com/BelmiroMungoi/Crud-Rest-Angular/assets/56709665/a318f91c-5564-4a7b-8494-2f3c058c6da1)
 
-# Projects
+# Project
 
-![bandicam 2023-09-12 14-47-39-005](https://github.com/BelmiroMungoi/Crud-Rest-Angular/assets/56709665/7dcaa60e-7e97-4e08-b5a9-a75ea0458ca7)
+![bandicam 2023-09-12 14-47-39-005](https://github.com/BelmiroMungoi/Crud-Rest-Angular/assets/56709665/0d631092-ee94-4148-b89b-9420ee9b9685)
 
 # Project Details
 
