@@ -45,6 +45,9 @@ An Employee Management System designed to simplify HR operations. With a user-fr
 
 ![bandicam 2023-09-12 14-47-05-854](https://github.com/BelmiroMungoi/Crud-Rest-Angular/assets/56709665/2eb8be99-f7d6-4c83-b26d-185ebe908796)
 
+# Department
+
+![bandicam 2023-09-12 14-47-13-463](https://github.com/BelmiroMungoi/Crud-Rest-Angular/assets/56709665/02a1b044-53b4-4af7-8151-9898380fc3f6)
 
 
 #
