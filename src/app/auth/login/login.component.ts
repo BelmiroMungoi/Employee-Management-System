@@ -47,8 +47,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required)
+      email: new FormControl('belmiro@admin.com', [Validators.required, Validators.email]),
+      password: new FormControl('12345', Validators.required)
     });
     if (localStorage.getItem('access_token') != null &&
       localStorage.getItem('access_token')?.toString().trim() != null) {
