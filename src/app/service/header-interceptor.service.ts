@@ -14,7 +14,7 @@ export class HeaderInterceptorService implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-  constructor(private toastr: ToastrService, private router: Router, private loginService: LoginService) { }
+  constructor(private router: Router, private loginService: LoginService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (localStorage.getItem('access_token') != null && localStorage.getItem('access_token')?.toString().trim() != null) {
@@ -23,53 +23,52 @@ export class HeaderInterceptorService implements HttpInterceptor {
 
       return next.handle(tokenRequest).pipe(catchError((error: HttpErrorResponse) => {
         if (error instanceof HttpErrorResponse && error.status === 403) {
-          console.log('Erro 403 teste')
-          this.handle403Error(req, next);
+          //this.addRefreshTokenHeader(req, next);
+          //this.handle403Error(req, next);
+          localStorage.clear();
+          this.router.navigate(['login']);
         }
 
         return throwError(error);
-      })); 
+      }));
     } else {
       return next.handle(req).pipe(catchError(this.processError));
     }
   }
 
-  refreshToken() {
-    this.loginService.refreshToken(localStorage.getItem('refresh_token')).subscribe(data => {
-      localStorage.setItem("access_token", data.access_token);;
-    }, error => {
-      localStorage.clear();
-      this.router.navigate(['login']);
-    })
+  addRefreshTokenHeader(req: HttpRequest<any>, next: HttpHandler){
+    var refreshToken = localStorage.getItem('refresh_token');
+    return next.handle(this.addTokenHeader(req, refreshToken));    
   }
 
   private handle403Error(request: HttpRequest<any>, next: HttpHandler) {
     if (!this.isRefreshing == true) {
-      
+
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
       var token = localStorage.getItem('refresh_token');
 
-      if (token)
-        return this.loginService.refreshToken(token).pipe(
+      if (token) {
+        return this.loginService.refreshToken(null).pipe(
           switchMap((token: any) => {
             console.log('Passou por aqui')
             this.isRefreshing = false;
             localStorage.removeItem('access_token');
             localStorage.setItem('access_token', token.access_token)
-            this.refreshTokenSubject.next(token.accessToken);
 
-            return next.handle(this.addTokenHeader(request, token.accessToken));
+            return next.handle(this.addTokenHeader(request, token.access_token));
           }),
           catchError((err) => {
             this.isRefreshing = false;
+            console.log('Houve um erro')
             localStorage.clear();
             this.router.navigate(['login']);
 
             return throwError(err);
           })
         );
+      }
     }
 
     return this.refreshTokenSubject.pipe(
@@ -81,7 +80,8 @@ export class HeaderInterceptorService implements HttpInterceptor {
 
   private addTokenHeader(req: HttpRequest<any>, token: any) {
     return req.clone({
-      headers: req.headers.set('Authorization', 'Bearer ' + token)
+      headers: req.headers.set('Authorization', 'Bearer ' + token),
+      withCredentials: true,
     });
   }
 

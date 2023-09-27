@@ -24,9 +24,7 @@ export class LoginService {
   }
 
   refreshToken(body: any): Observable<any> {
-    return this.http.post(AppConstants.baseServer + "/auth/refresh-token", {
-      refreshToken: body
-    }, this.httpOptions)
+    return this.http.post(AppConstants.baseServer + "/auth/refresh-token", body)
   }
 
   isAuthenticated() {
