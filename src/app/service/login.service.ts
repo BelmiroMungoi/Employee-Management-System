@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConstants } from '../app-constants';
 import { Observable } from 'rxjs'
 import { LoginRequestPayload } from '../model/login-request.payload';
@@ -9,6 +9,10 @@ import { LoginRequestPayload } from '../model/login-request.payload';
 })
 export class LoginService {
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  
   constructor(private http: HttpClient) { }
 
   login(userLogin: LoginRequestPayload): Observable<any>{
@@ -20,7 +24,7 @@ export class LoginService {
   }
 
   refreshToken(body: any): Observable<any> {
-    return this.http.post(AppConstants.baseServer + "/auth/refresh_token", body)
+    return this.http.post(AppConstants.baseServer + "/auth/refresh-token", body)
   }
 
   isAuthenticated() {
