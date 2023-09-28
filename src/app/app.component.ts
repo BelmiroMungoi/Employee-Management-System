@@ -24,9 +24,8 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private imageService: ImageService, private userService: UserService, 
     private loginService: LoginService) { }
 
-  ngOnInit(): void {
-    this.getUserDetails();
-    this.showImage();
+  ngOnInit(): void {    
+    this.showDetails();
     this.toggleSideBar();
   }
 
@@ -36,6 +35,13 @@ export class AppComponent implements OnInit {
       return false;
     } else {
       return true;
+    }
+  }
+
+  public showDetails() {
+    if (!this.hideMenu()) {
+      this.getUserDetails();
+      this.showImage();
     }
   }
 
