@@ -22,6 +22,10 @@ export class DepartmentComponent implements OnInit {
   name!: string;
   page!: number;
   total!: number;
+  id!: Number;
+  department!: string;
+  display: string = 'none';
+
 
   constructor(private departmentService: DepartmentService, private toastr: ToastrService) {
     this.departmentRequest = {
@@ -51,21 +55,17 @@ export class DepartmentComponent implements OnInit {
           this.toastr.success(data.responseMessage);
           this.getAllDepartments();
           this.cleanForm();
-        },
-          error => {
-            this.toastr.error('Ocorreu um erro ao actualizar departamento');
-            console.error(error.message);
-          })
+        }, error => {
+          this.toastr.error('Ocorreu um erro ao actualizar departamento');
+        })
       } else {
         this.departmentService.createDepartment(this.mapToRequest()).subscribe(data => {
           this.toastr.success(data.responseMessage);
           this.getAllDepartments();
           this.cleanForm()
-        },
-          error => {
-            this.toastr.error('Ocorreu um erro ao salvar departamento!')
-            console.error(error);
-          }
+        }, error => {
+          this.toastr.error('Já existe um departamento com esse nome!')
+        }
         )
       }
     } else {
@@ -79,7 +79,6 @@ export class DepartmentComponent implements OnInit {
       this.total = response.totalElements;
     }, error => {
       this.toastr.error('Ocorreu um erro ao carregar a lista de departamentos!');
-      console.error(error.message)
     })
   }
 
@@ -93,8 +92,6 @@ export class DepartmentComponent implements OnInit {
         this.total = response.totalElements;
       }, error => {
         this.toastr.error('Ocorreu ao pesquisar departamentos!');
-        console.error(error.message);
-
       })
     }
   }
@@ -105,9 +102,10 @@ export class DepartmentComponent implements OnInit {
       this.departmentService.deleteDepartment(this.departmentId).subscribe(response => {
         this.toastr.success(response);
         this.getAllDepartments();
+        this.onCloseDeleteModal();
       }, error => {
+        this.onCloseDeleteModal();
         this.toastr.error('Você não pode eliminar um departamento com funcionários!');
-        console.error(error.message);
       })
     }
   }
@@ -139,6 +137,16 @@ export class DepartmentComponent implements OnInit {
         console.error(error);
       })
     }
+  }
+
+  public onOpenDeleteModal(name: string, id: Number) {
+    this.display = 'block';
+    this.id = id;
+    this.department = name;
+  }
+
+  public onCloseDeleteModal() {
+    this.display = 'none';
   }
 
   public cleanForm() {

@@ -19,6 +19,11 @@ export class EmployeeComponent implements OnInit {
   name!: string;
   total!: number;
   page!: any;
+  display: string = 'none';
+  id!: Number;
+  index!: any;
+  firstname!: string;
+  lastname!: string;
 
   constructor(private employeeService: EmployeeService, private toastr: ToastrService) {}
 
@@ -77,9 +82,22 @@ export class EmployeeComponent implements OnInit {
 
   public deleteEmployee(id: Number, index: any) {
     this.employeeService.deleteEmployee(id).subscribe(data => {
+      this.onCloseDeleteModal();
       this.employees.splice(index, 1);
       this.toastr.success(data);
     })
+  }
+
+  public onOpenDeleteModal(name: string, last: string, id: Number, index: any) {
+    this.display='block';    
+    this.id = id;
+    this.index = index;
+    this.firstname = name;
+    this.lastname = last;
+  }
+
+  public onCloseDeleteModal() {
+    this.display='none';
   }
 
 }

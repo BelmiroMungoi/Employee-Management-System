@@ -5,6 +5,7 @@ import { catchError, filter, switchMap, take, tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,9 @@ export class HeaderInterceptorService implements HttpInterceptor {
         if (error instanceof HttpErrorResponse && error.status === 403) {
           //this.addRefreshTokenHeader(req, next);
           //this.handle403Error(req, next);
+          this.loginService.logOut(null).subscribe(data => { });
           localStorage.clear();
-          this.router.navigate(['login']);
+          this.router.navigate(['login'])
         }
 
         return throwError(error);
@@ -36,9 +38,9 @@ export class HeaderInterceptorService implements HttpInterceptor {
     }
   }
 
-  addRefreshTokenHeader(req: HttpRequest<any>, next: HttpHandler){
+  addRefreshTokenHeader(req: HttpRequest<any>, next: HttpHandler) {
     var refreshToken = localStorage.getItem('refresh_token');
-    return next.handle(this.addTokenHeader(req, refreshToken));    
+    return next.handle(this.addTokenHeader(req, refreshToken));
   }
 
   private handle403Error(request: HttpRequest<any>, next: HttpHandler) {
