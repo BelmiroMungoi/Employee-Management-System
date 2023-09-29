@@ -85,13 +85,15 @@
                                     <td>
                                         <button style="width: 40px; margin-right: 2px;"
                                             [routerLink]="['/missionProfile', mission.id]"
-                                            class="bi bi-eye-fill btn btn-info"
-                                            title="Ver Detalhes do Projecto"></button>
+                                            class="bi bi-eye-fill btn btn-info" title="Ver Detalhes do Projecto">
+                                        </button>
                                         <button style="width: 40px; margin-right: 2px;"
-                                            (click)="deleteMission(mission.id)" class="bi bi-trash btn btn-danger"
-                                            title="Deletar"></button>
+                                            (click)="onOpenDeleteModal(mission.missionName, mission.id)" class="bi bi-trash btn btn-danger"
+                                            title="Deletar">
+                                        </button>
                                         <button style="width: 40px;" class="bi bi-pencil-square btn btn-warning"
-                                            (click)="fillForm(mission.id)" title="Editar"></button>
+                                            (click)="fillForm(mission.id)" title="Editar">
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -99,6 +101,26 @@
                         <div class="text-center">
                             <pagination-controls (pageChange)="loadPage(page = $event)" previousLabel="Anterior"
                                 nextLabel="Próximo"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                [ngStyle]="{'display': display, 'opacity': 1}">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><b>Deletar Projecto</b></h5>
+                            <button type="button" class="btn-close" (click)="onCloseDeleteModal()"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Têm certeza que deseja eliminar a missão <b>{{mission}}</b>?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger"
+                                (click)="deleteMission(id)">Sim</button>
+                            <button type="button" class="btn btn-secondary" (click)="onCloseDeleteModal()">Não</button>
                         </div>
                     </div>
                 </div>
