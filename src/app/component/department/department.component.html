@@ -23,11 +23,13 @@
                             </div>
                             <div class="col-12">
                                 <label for="name" class="form-label">Nome do Departamento</label>
-                                <input type="text" [formControlName]="'name'" class="form-control" id="name" placeholder="Exemplo: Departamento de Informatica">
+                                <input type="text" [formControlName]="'name'" class="form-control" id="name"
+                                    placeholder="Exemplo: Departamento de Informatica">
                             </div>
                             <div class="col-12">
                                 <label for="abrev" class="form-label">Abreviacão</label>
-                                <input type="text" [formControlName]="'shortName'" class="form-control" id="abrev" placeholder="Exemplo: TI">
+                                <input type="text" [formControlName]="'shortName'" class="form-control" id="abrev"
+                                    placeholder="Exemplo: TI">
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary"
@@ -65,24 +67,50 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let department of departments | paginate: { itemsPerPage: 8, currentPage: page, totalItems: total}">
+                                <tr
+                                    *ngFor="let department of departments | paginate: { itemsPerPage: 8, currentPage: page, totalItems: total}">
                                     <th scope="row">{{department.id}}</th>
                                     <td>{{department.name}}</td>
                                     <td>{{department.shortName}}</td>
                                     <td>{{department.employeeQuantity}}</td>
                                     <td>
-                                        <button style="width: 40px; margin-right: 2px;" [routerLink]="['/departmentDetails', department.id]"
-                                            class="bi bi-eye-fill btn btn-info" title="Ver Departamento"></button>
-                                        <button style="width: 40px; margin-right: 2px;" (click)="deleteDepartment(department.id)"
-                                            class="bi bi-trash btn btn-danger" title="Deletar"></button>
+                                        <button style="width: 40px; margin-right: 2px;"
+                                            [routerLink]="['/departmentDetails', department.id]"
+                                            class="bi bi-eye-fill btn btn-info" title="Ver Departamento">
+                                        </button>
+                                        <button style="width: 40px; margin-right: 2px;"
+                                            (click)="onOpenDeleteModal(department.name, department.id)" class="bi bi-trash btn btn-danger"
+                                            title="Deletar">
+                                        </button>
                                         <button style="width: 40px;" class="bi bi-pencil-square btn btn-warning"
-                                           (click)="fillForm(department.id)" title="Editar"></button>
+                                            (click)="fillForm(department.id)" title="Editar">
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="text-center">
-                            <pagination-controls (pageChange)="loadPage(page = $event)" previousLabel="Anterior"nextLabel="Próximo"></pagination-controls>
+                            <pagination-controls (pageChange)="loadPage(page = $event)" previousLabel="Anterior"
+                                nextLabel="Próximo"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                [ngStyle]="{'display': display, 'opacity': 1}">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"><b>Deletar Projecto</b></h5>
+                            <button type="button" class="btn-close" (click)="onCloseDeleteModal()"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Têm certeza que deseja eliminar o departamento <b>{{department}}</b>?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" (click)="deleteDepartment(id)">Sim</button>
+                            <button type="button" class="btn btn-secondary" (click)="onCloseDeleteModal()">Não</button>
                         </div>
                     </div>
                 </div>
