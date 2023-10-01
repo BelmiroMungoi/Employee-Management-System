@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,7 @@ export class HeaderInterceptorService implements HttpInterceptor {
       return next.handle(req).pipe(catchError(this.processError));
     }
   }
+
 
   private handle403Error(request: HttpRequest<any>, next: HttpHandler) {
     if (!this.isRefreshing) {

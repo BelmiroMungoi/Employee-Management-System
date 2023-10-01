@@ -10,7 +10,7 @@
     </nav>
   </div><!-- End Page Title -->
 
-  <section class="section">
+  <section class="section" id="section">
     <div class="row">
       <div class="col-md-3" style="margin-bottom: 10px;">
         <button routerLink="/employeeAdd" class="btn btn-primary bi bi-plus-square"> Adicionar</button>
@@ -23,12 +23,13 @@
             <div class="search-bar" style="margin-bottom: 25px;">
               <form class="search-form row g-2" [formGroup]="searchForm" (ngSubmit)="searchEmployeeByFirstname()">
                 <div class="col-md-5" style=" margin-left:20px; position:absolute; right:0px; top:35px;">
-                  <input type="text" [formControlName]="'firstname'" name="firstname" placeholder="Pesquisa por nome" title="Insira o nome">
+                  <input type="text" [formControlName]="'firstname'" name="firstname" placeholder="Pesquisa por nome"
+                    title="Insira o nome">
                   <button type="submit" title="Pesquisar"><i class="bi bi-search"></i></button>
                 </div>
               </form>
             </div>
-            <!-- Table with stripped rows -->
+
             <table id="datatable" class="table datatable table-striped table-hover">
               <thead>
                 <tr>
@@ -42,7 +43,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let employee of employees |  paginate: { itemsPerPage: 8, currentPage: page, totalItems: total}; let i = index">
+                <tr
+                  *ngFor="let employee of employees |  paginate: { itemsPerPage: 8, currentPage: page, totalItems: total}; let i = index">
                   <th scope="row">{{employee.id}}</th>
                   <td>{{employee.firstname}}</td>
                   <td>{{employee.lastname}}</td>
@@ -52,23 +54,44 @@
                   <td>
                     <button style="width: 40px; margin-right: 2px;" class="bi bi-person-square btn btn-info"
                       [routerLink]="['/employeeProfile', employee.id]" title="Ver Perfil"></button>
-                    <button style="width: 40px; margin-right: 2px;" class="bi bi-trash btn btn-danger"
-                      (click)="deleteEmployee(employee.id, i)" title="Deletar"></button>
+                    <button style="width: 40px; margin-right: 2px;" id="buttonModal" class="bi bi-trash btn btn-danger"
+                      data-bs-toggle="modal"
+                      (click)="onOpenDeleteModal(employee.firstname, employee.lastname, employee.id, i)"
+                      title="Deletar"></button>
                     <button style="width: 40px;" [routerLink]="['/employeeAdd', employee.id]"
                       class="bi bi-pencil-square btn btn-warning" title="Editar"></button>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <!-- End Table with stripped rows -->
+
             <div class="text-center">
-              <pagination-controls (pageChange)="loadPage(page = $event)" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+              <pagination-controls (pageChange)="loadPage(page = $event)" previousLabel="Anterior"
+                nextLabel="Próximo"></pagination-controls>
             </div>
           </div>
         </div>
-
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+          [ngStyle]="{'display': display, 'opacity': 1}">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Deletar Funcionário</h5>
+                <button type="button" class="btn-close" (click)="onCloseDeleteModal()" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Têm certeza que deseja eliminar o funcionário <b>{{firstname}} {{lastname}}</b>?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="deleteEmployee(id, index)">Sim</button>
+                <button type="button" class="btn btn-secondary" (click)="onCloseDeleteModal()">Não</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
   </section>
 
 </main><!-- End #main -->

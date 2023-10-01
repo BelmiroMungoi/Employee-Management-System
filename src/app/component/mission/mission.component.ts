@@ -23,6 +23,9 @@ export class MissionComponent implements OnInit {
   total!: number;
   page!: number;
   name!: string;
+  display: string = 'none';
+  mission!: string;
+  id!: Number;
 
   constructor(private missionService: MissionService, private toastr: ToastrService) {
     this.missionRequest = {
@@ -112,8 +115,10 @@ export class MissionComponent implements OnInit {
     if (this.missionId != null && this.missionId.toString().length != 0) {
       this.missionService.deleteMission(this.missionId).subscribe(response => {
         this.getAllMission();
+        this.onCloseDeleteModal();
         this.toastr.success(response);
       }, error => {
+        this.onCloseDeleteModal();
         this.toastr.error('ATENCÃO, você não pode eliminar esse projecto! Mude o seu status');
         console.error(error);
       })
@@ -152,6 +157,16 @@ export class MissionComponent implements OnInit {
         console.error(error);
       })
     }
+  }
+
+  public onOpenDeleteModal(name: string, id: Number) {
+    this.display='block';
+    this.id = id;
+    this.mission = name;
+  }
+
+  public onCloseDeleteModal() {
+    this.display='none';
   }
 
   private mapToRequest(): MissionRequestPayload {
