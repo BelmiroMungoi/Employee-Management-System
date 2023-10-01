@@ -1,8 +1,7 @@
 import { Injectable, NgModule } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpResponse, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, filter, switchMap, take, tap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
+import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
@@ -23,12 +22,8 @@ export class HeaderInterceptorService implements HttpInterceptor {
       var tokenRequest = this.addTokenHeader(req, token);
 
       return next.handle(tokenRequest).pipe(catchError((error: HttpErrorResponse) => {
-        if (error instanceof HttpErrorResponse && error.status === 403) {
-          //this.addRefreshTokenHeader(req, next);
-          //this.handle403Error(req, next);
-          this.loginService.logOut(null).subscribe(data => { });
-          localStorage.clear();
-          this.router.navigate(['login'])
+        if (error instanceof HttpErrorResponse && !req.url.includes('/auth/authenticate') && error.status === 403) {
+          this.handle403Error(req, next);
         }
 
         return throwError(error);
@@ -38,25 +33,19 @@ export class HeaderInterceptorService implements HttpInterceptor {
     }
   }
 
-  addRefreshTokenHeader(req: HttpRequest<any>, next: HttpHandler) {
-    var refreshToken = localStorage.getItem('refresh_token');
-    return next.handle(this.addTokenHeader(req, refreshToken));
-  }
 
   private handle403Error(request: HttpRequest<any>, next: HttpHandler) {
-    if (!this.isRefreshing == true) {
+    if (!this.isRefreshing) {
 
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
-      var token = localStorage.getItem('refresh_token');
+      var refreshToken = localStorage.getItem('refresh_token');
+      localStorage.removeItem('access_token');
 
-      if (token) {
-        return this.loginService.refreshToken(null).pipe(
-          switchMap((token: any) => {
-            console.log('Passou por aqui')
+      if (refreshToken) {
+        return this.loginService.refreshToken(refreshToken).subscribe((token) => {
             this.isRefreshing = false;
-            localStorage.removeItem('access_token');
             localStorage.setItem('access_token', token.access_token)
 
             return next.handle(this.addTokenHeader(request, token.access_token));
@@ -64,12 +53,12 @@ export class HeaderInterceptorService implements HttpInterceptor {
           catchError((err) => {
             this.isRefreshing = false;
             console.log('Houve um erro')
+            this.loginService.logOut(null).subscribe(data => { });;
             localStorage.clear();
             this.router.navigate(['login']);
 
             return throwError(err);
-          })
-        );
+          });
       }
     }
 
@@ -95,7 +84,6 @@ export class HeaderInterceptorService implements HttpInterceptor {
     } else {
       errorMessage = 'Código: ' + error.error.code + error.error.error;
     }
-    console.error(errorMessage);
     return throwError(errorMessage);
   }
 }
