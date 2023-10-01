@@ -23,8 +23,6 @@ export class HeaderInterceptorService implements HttpInterceptor {
       return next.handle(tokenRequest).pipe(catchError((error: HttpErrorResponse) => {
         if (error instanceof HttpErrorResponse && !req.url.includes('/auth/authenticate') && error.status === 403) {
           this.handle403Error(req, next);
-          //localStorage.clear();
-          //this.router.navigate(['login']);
         }
 
         return throwError(error);
@@ -53,7 +51,7 @@ export class HeaderInterceptorService implements HttpInterceptor {
           catchError((err) => {
             this.isRefreshing = false;
             console.log('Houve um erro')
-            this.loginService.logOut(null);
+            this.loginService.logOut(null).subscribe(data => { });;
             localStorage.clear();
             this.router.navigate(['login']);
 
