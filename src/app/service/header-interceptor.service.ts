@@ -47,7 +47,8 @@ export class HeaderInterceptorService implements HttpInterceptor {
         return this.loginService.refreshToken(refreshToken).subscribe((token) => {
             this.isRefreshing = false;
             localStorage.setItem('access_token', token.access_token)
-
+            //this.router.navigate(['home']);
+            window.location.reload();
             return next.handle(this.addTokenHeader(request, token.access_token));
           }),
           catchError((err) => {
