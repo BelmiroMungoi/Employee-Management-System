@@ -102,6 +102,7 @@ export class HomeComponent implements OnInit {
           {
             data: [this.statusChart.open, this.statusChart.pendent,
             this.statusChart.closed, this.statusChart.canceled],
+            label: 'Quantidade de Projectos'
           },
         ],
       }
